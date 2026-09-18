@@ -1,0 +1,217 @@
+# ---------------------------------------------------------------------------
+# Single source of truth for the AI SDLC portfolio / responsibility map.
+#
+# Edit THIS file only. Everything else (Mermaid, draw.io, PowerPoint, the RACI
+# matrix) is generated from it by `python render.py`.
+#
+# Three things are modelled separately, because they are three different
+# questions and they must never be drawn in one picture:
+#   1. items          -> WHAT exists (portfolio items and their parts)
+#   2. responsibilities-> WHO has which role on each item (the RACI matrix)
+#   3. handoffs        -> HOW divisions need each other (the value flow)
+# ---------------------------------------------------------------------------
+
+meta:
+  title: AI SDLC — portfolio, responsibility & dependency map
+  subtitle: One model, three views
+  version: "0.1"
+  updated: "2026-09-18"
+  maintainer: wageurts
+
+# Layers are drawn top to bottom in the order listed here.
+layers:
+  - id: adoption
+    name: Adoption & change
+    hint: Who makes the organisation actually use it
+  - id: use
+    name: Delivery use
+    hint: Teams that build software with the AI SDLC
+  - id: capability
+    name: AI SDLC capability
+    hint: The product itself — agents, guardrails, practices, flow
+  - id: platform
+    name: Platform foundation
+    hint: What the capability is built on
+
+divisions:
+  - id: PE
+    name: Platform Engineering
+    long_name: Platform Engineering
+    color: "#4C6EF5"
+  - id: DAE
+    name: DAE
+    long_name: Data, AI & Engineering        # TODO: confirm official expansion
+    color: "#7048E8"
+  - id: CD
+    name: CD
+    long_name: Continuous Delivery           # TODO: confirm official expansion
+    color: "#0CA678"
+  - id: STT
+    name: S&TT
+    long_name: Strategy & Technology Transformation   # TODO: confirm
+    color: "#F59F00"
+  - id: SE
+    name: Software Engineering
+    long_name: Software Engineering (delivery teams)
+    color: "#D6336C"
+
+# The role vocabulary. Keep it short — six roles is already the practical max
+# for a readable matrix. `code` is what appears in the matrix cells.
+roles:
+  - id: build
+    code: B
+    label: Builds & maintains
+    definition: Creates the thing and keeps it running as a product.
+  - id: po
+    code: P
+    label: Product owner
+    definition: Decides what it should do next; owns the backlog.
+  - id: use
+    code: U
+    label: Uses
+    definition: Consumes it in day-to-day delivery work.
+  - id: adopt
+    code: A
+    label: Drives adoption
+    definition: Rollout, enablement, training, measuring uptake.
+  - id: govern
+    code: G
+    label: Governs
+    definition: Sets policy, standards, guardrails; accountable for compliance.
+  - id: operate
+    code: O
+    label: Operates
+    definition: Runs it, watches it, carries the pager.
+
+items:
+  # --- platform foundation -------------------------------------------------
+  - id: idp
+    name: Internal developer platform
+    layer: platform
+    portfolio: Platform Engineering
+  - id: cicd
+    name: CI/CD & toolchain
+    layer: platform
+    portfolio: Platform Engineering
+  - id: model-access
+    name: Model access & gateway
+    layer: platform
+    portfolio: Platform Engineering
+
+  # --- the AI SDLC itself --------------------------------------------------
+  - id: ai-sdlc
+    name: AI SDLC
+    layer: capability
+    portfolio: Platform Engineering
+    kind: portfolio-item
+    note: Portfolio item inside Platform Engineering; built by DAE, used by CD.
+  - id: agents
+    name: Agents
+    layer: capability
+    parent: ai-sdlc
+  - id: guardrails
+    name: Guardrails
+    layer: capability
+    parent: ai-sdlc
+  - id: practices
+    name: AI best practices
+    layer: capability
+    parent: ai-sdlc
+  - id: sdlc-flow
+    name: The flow (golden path)
+    layer: capability
+    parent: ai-sdlc
+
+  # --- delivery use --------------------------------------------------------
+  - id: delivery-teams
+    name: Delivery teams & squads
+    layer: use
+  - id: ways-of-working
+    name: Ways of working
+    layer: use
+
+  # --- adoption ------------------------------------------------------------
+  - id: enablement
+    name: Enablement & training
+    layer: adoption
+  - id: adoption-metrics
+    name: Adoption measurement
+    layer: adoption
+
+  # --- cross-cutting: drawn as a rail beside all layers, never as a box with
+  #     eight arrows coming out of it.
+  - id: observability
+    name: Observability
+    crosscutting: true
+    note: Touches every layer; primary home is CD.
+
+# WHO does WHAT. item + division + role. Multiple rows per item is normal —
+# that is exactly the mix you are trying to make visible.
+responsibilities:
+  - {item: ai-sdlc,        division: PE,  role: govern, note: Portfolio home}
+  - {item: ai-sdlc,        division: DAE, role: build}
+  - {item: ai-sdlc,        division: CD,  role: use}
+  - {item: ai-sdlc,        division: STT, role: adopt}
+
+  - {item: agents,         division: DAE, role: build}
+  - {item: agents,         division: SE,  role: po,     note: Teams act as PO of the agents}
+  - {item: agents,         division: CD,  role: use}
+
+  - {item: guardrails,     division: DAE, role: build}
+  - {item: guardrails,     division: DAE, role: govern}
+  - {item: guardrails,     division: CD,  role: use}
+
+  - {item: practices,      division: DAE, role: build}
+  - {item: practices,      division: SE,  role: use}
+  - {item: practices,      division: STT, role: adopt}
+
+  - {item: sdlc-flow,      division: CD,  role: build}
+  - {item: sdlc-flow,      division: SE,  role: po,     note: Teams act as PO of the flow}
+  - {item: sdlc-flow,      division: CD,  role: operate}
+
+  - {item: observability,  division: CD,  role: build}
+  - {item: observability,  division: CD,  role: operate}
+  - {item: observability,  division: DAE, role: use}
+  - {item: observability,  division: SE,  role: use}
+  - {item: observability,  division: STT, role: use,    note: Source for adoption metrics}
+
+  - {item: delivery-teams, division: SE,  role: build}
+  - {item: delivery-teams, division: CD,  role: use}
+  - {item: ways-of-working, division: STT, role: adopt}
+  - {item: ways-of-working, division: SE,  role: use}
+
+  - {item: enablement,     division: STT, role: build}
+  - {item: enablement,     division: DAE, role: use}
+  - {item: adoption-metrics, division: STT, role: build}
+
+  - {item: idp,            division: PE,  role: build}
+  - {item: cicd,           division: PE,  role: build}
+  - {item: cicd,           division: CD,  role: use}
+  - {item: model-access,   division: PE,  role: build}
+  - {item: model-access,   division: DAE, role: use}
+
+# Item-to-item dependencies: what needs what. Keep the label a verb.
+dependencies:
+  - {from: model-access,  to: agents,          label: provides models to}
+  - {from: idp,           to: ai-sdlc,         label: hosts}
+  - {from: cicd,          to: sdlc-flow,       label: executes}
+  - {from: agents,        to: sdlc-flow,       label: plug into}
+  - {from: guardrails,    to: agents,          label: constrain}
+  - {from: practices,     to: sdlc-flow,       label: shape}
+  - {from: sdlc-flow,     to: delivery-teams,  label: used by}
+  - {from: delivery-teams, to: ways-of-working, label: follow}
+  - {from: enablement,    to: delivery-teams,  label: enables}
+  - {from: adoption-metrics, to: enablement,   label: steers}
+  - {from: observability, to: adoption-metrics, label: feeds}
+  - {from: delivery-teams, to: agents,         label: set direction for}
+
+# Division-to-division handoffs: the "we need each other" story, one line each.
+# This is the slide people actually argue about, so keep it under ~8 arrows.
+handoffs:
+  - {from: PE,  to: DAE, label: provides platform & portfolio home}
+  - {from: DAE, to: CD,  label: "delivers agents, guardrails, practices"}
+  - {from: CD,  to: SE,  label: runs the flow teams work in}
+  - {from: SE,  to: DAE, label: prioritises agents (PO role)}
+  - {from: SE,  to: CD,  label: prioritises the flow (PO role)}
+  - {from: STT, to: SE,  label: drives adoption & enablement}
+  - {from: CD,  to: STT, label: supplies observability & usage data}

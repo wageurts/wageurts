@@ -1,0 +1,50 @@
+<mxfile host="render.py">
+  <diagram name="AI SDLC — portfolio, responsibility &amp; dependency map">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" page="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="n3" value="Adoption &amp; change" style="swimlane;horizontal=0;html=1;startSize=30;fillColor=#F1F3F5;strokeColor=#CED4DA;fontColor=#495057;fontSize=14;" vertex="1" parent="1"><mxGeometry x="40" y="40" width="1100" height="150" as="geometry"/></mxCell>
+        <mxCell id="n4" value="Enablement &amp; training
+STT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F59F00;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n3"><mxGeometry x="60" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n5" value="Adoption measurement
+STT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F59F00;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n3"><mxGeometry x="290" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n6" value="Delivery use" style="swimlane;horizontal=0;html=1;startSize=30;fillColor=#F1F3F5;strokeColor=#CED4DA;fontColor=#495057;fontSize=14;" vertex="1" parent="1"><mxGeometry x="40" y="210" width="1100" height="150" as="geometry"/></mxCell>
+        <mxCell id="n7" value="Delivery teams &amp; squads
+SE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6336C;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n6"><mxGeometry x="60" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n8" value="Ways of working" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#868E96;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n6"><mxGeometry x="290" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n9" value="AI SDLC capability" style="swimlane;horizontal=0;html=1;startSize=30;fillColor=#F1F3F5;strokeColor=#CED4DA;fontColor=#495057;fontSize=14;" vertex="1" parent="1"><mxGeometry x="40" y="380" width="1100" height="150" as="geometry"/></mxCell>
+        <mxCell id="n10" value="AI SDLC
+DAE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7048E8;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n9"><mxGeometry x="60" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n11" value="Agents
+DAE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7048E8;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n9"><mxGeometry x="290" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n12" value="Guardrails
+DAE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7048E8;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n9"><mxGeometry x="520" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n13" value="AI best practices
+DAE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7048E8;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n9"><mxGeometry x="750" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n14" value="The flow (golden path)
+CD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0CA678;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n9"><mxGeometry x="980" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n15" value="Platform foundation" style="swimlane;horizontal=0;html=1;startSize=30;fillColor=#F1F3F5;strokeColor=#CED4DA;fontColor=#495057;fontSize=14;" vertex="1" parent="1"><mxGeometry x="40" y="550" width="1100" height="150" as="geometry"/></mxCell>
+        <mxCell id="n16" value="Internal developer platform
+PE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4C6EF5;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n15"><mxGeometry x="60" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n17" value="CI/CD &amp; toolchain
+PE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4C6EF5;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n15"><mxGeometry x="290" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n18" value="Model access &amp; gateway
+PE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4C6EF5;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="n15"><mxGeometry x="520" y="40" width="200" height="70" as="geometry"/></mxCell>
+        <mxCell id="n19" value="Observability" style="rounded=1;whiteSpace=wrap;html=1;horizontal=0;fillColor=#0CA678;strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="1"><mxGeometry x="1160" y="40" width="70" height="660" as="geometry"/></mxCell>
+        <mxCell id="n20" value="provides models to" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n18" target="n11"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n21" value="hosts" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n16" target="n10"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n22" value="executes" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n17" target="n14"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n23" value="plug into" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n11" target="n14"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n24" value="constrain" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n12" target="n11"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n25" value="shape" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n13" target="n14"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n26" value="used by" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n14" target="n7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n27" value="follow" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n7" target="n8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n28" value="enables" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n4" target="n7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n29" value="steers" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n5" target="n4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n30" value="feeds" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n19" target="n5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n31" value="set direction for" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;strokeColor=#495057;" edge="1" parent="1" source="n7" target="n11"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
