@@ -3,9 +3,20 @@
 from __future__ import annotations
 
 import pathlib
+import xml.etree.ElementTree as ET
 from xml.sax.saxutils import escape
 
 import layout
+
+
+def _attr(value: str) -> str:
+    """XML-escape an attribute value.
+
+    mxCell labels are HTML *inside* an XML attribute, so the markup itself has
+    to be escaped once more — otherwise draw.io refuses the file with
+    "Unescaped '<' not allowed in attributes values".
+    """
+    return escape(value, {'"': "&quot;"})
 
 
 def _html_label(lines) -> str:
@@ -24,8 +35,9 @@ def render(page: layout.Page) -> str:
         nonlocal nid
         nid += 1
         cells.append(
-            f'        <mxCell id="n{nid}" value="{value}" style="{style}" vertex="1" '
-            f'parent="1"><mxGeometry x="{x:.0f}" y="{y:.0f}" width="{w:.0f}" '
+            f'        <mxCell id="n{nid}" value="{_attr(value)}" '
+            f'style="{_attr(style)}" vertex="1" parent="1">'
+            f'<mxGeometry x="{x:.0f}" y="{y:.0f}" width="{w:.0f}" '
             f'height="{h:.0f}" as="geometry"/></mxCell>')
 
     for sh in page.shapes:
@@ -72,5 +84,9 @@ def render(page: layout.Page) -> str:
 
 
 def write(page: layout.Page, path: pathlib.Path) -> pathlib.Path:
-    path.write_text(render(page), encoding="utf-8")
+    xml = render(page)
+    # draw.io rejects the whole file on a single unescaped character, and the
+    # error it shows ("Not a diagram file") does not say where. Fail here.
+    ET.fromstring(xml)
+    path.write_text(xml, encoding="utf-8")
     return path
