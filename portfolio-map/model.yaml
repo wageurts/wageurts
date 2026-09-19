@@ -1,217 +1,111 @@
 # ---------------------------------------------------------------------------
-# Single source of truth for the AI SDLC portfolio / responsibility map.
+# Single source of truth for the one-page portfolio overview.
 #
-# Edit THIS file only. Everything else (Mermaid, draw.io, PowerPoint, the RACI
-# matrix) is generated from it by `python render.py`.
+# Edit THIS file only. `python render.py` regenerates the PowerPoint slide, the
+# draw.io drawing, the SVG and the CSV from it — all from the same layout, so
+# they never drift apart.
 #
-# Three things are modelled separately, because they are three different
-# questions and they must never be drawn in one picture:
-#   1. items          -> WHAT exists (portfolio items and their parts)
-#   2. responsibilities-> WHO has which role on each item (the RACI matrix)
-#   3. handoffs        -> HOW divisions need each other (the value flow)
+# The overview is a grid: propositions are the rows, divisions are the columns,
+# and each cell holds the contributions that division makes to that
+# proposition. Colour of a contribution = the role it plays.
+#
+# Cells marked `assumed: true` are my inference, not something you stated —
+# confirm or delete them.
 # ---------------------------------------------------------------------------
 
 meta:
-  title: AI SDLC — portfolio, responsibility & dependency map
-  subtitle: One model, three views
-  version: "0.1"
-  updated: "2026-09-18"
-  maintainer: wageurts
-
-# Layers are drawn top to bottom in the order listed here.
-layers:
-  - id: adoption
-    name: Adoption & change
-    hint: Who makes the organisation actually use it
-  - id: use
-    name: Delivery use
-    hint: Teams that build software with the AI SDLC
-  - id: capability
-    name: AI SDLC capability
-    hint: The product itself — agents, guardrails, practices, flow
-  - id: platform
-    name: Platform foundation
-    hint: What the capability is built on
+  title: Portfolio overview — who does what
+  subtitle: Rows are propositions · columns are divisions · colour is the role
+  version: "0.2"
+  updated: "2026-09-19"
 
 divisions:
-  - id: PE
-    name: Platform Engineering
-    long_name: Platform Engineering
-    color: "#4C6EF5"
-  - id: DAE
-    name: DAE
-    long_name: Data, AI & Engineering        # TODO: confirm official expansion
-    color: "#7048E8"
   - id: CD
-    name: CD
-    long_name: Continuous Delivery           # TODO: confirm official expansion
-    color: "#0CA678"
+    name: Cloud & Development
+    short: C&D
+    color: "#0B7285"
+    expertise: [Software Engineering, Cloud Engineering, Platform Engineering, Workplace Management]
+  - id: DAE
+    name: Data, AI & Engagement
+    short: DA&E
+    color: "#5F3DC4"
+    expertise: [Data Management, Data Platform, AI, Automation]
   - id: STT
-    name: S&TT
-    long_name: Strategy & Technology Transformation   # TODO: confirm
-    color: "#F59F00"
-  - id: SE
-    name: Software Engineering
-    long_name: Software Engineering (delivery teams)
-    color: "#D6336C"
+    name: Security & Technology Transformation
+    short: S&TT
+    color: "#A61E4D"
+    expertise: [Transformation, Adoption, Security]
 
-# The role vocabulary. Keep it short — six roles is already the practical max
-# for a readable matrix. `code` is what appears in the matrix cells.
+# Six roles is the practical maximum for a readable page. `code` is the letter
+# used in the CSV companion.
 roles:
-  - id: build
-    code: B
-    label: Builds & maintains
-    definition: Creates the thing and keeps it running as a product.
-  - id: po
-    code: P
-    label: Product owner
-    definition: Decides what it should do next; owns the backlog.
-  - id: use
-    code: U
-    label: Uses
-    definition: Consumes it in day-to-day delivery work.
-  - id: adopt
-    code: A
-    label: Drives adoption
-    definition: Rollout, enablement, training, measuring uptake.
-  - id: govern
-    code: G
-    label: Governs
-    definition: Sets policy, standards, guardrails; accountable for compliance.
-  - id: operate
-    code: O
-    label: Operates
-    definition: Runs it, watches it, carries the pager.
+  - {id: build,   code: B, label: Builds & delivers, color: "#1C7ED6"}
+  - {id: use,     code: U, label: Uses,              color: "#0CA678"}
+  - {id: operate, code: O, label: Operates & runs,   color: "#495057"}
+  - {id: govern,  code: G, label: Governs,           color: "#E8590C"}
+  - {id: adopt,   code: A, label: Drives adoption,   color: "#7048E8"}
 
-items:
-  # --- platform foundation -------------------------------------------------
-  - id: idp
-    name: Internal developer platform
-    layer: platform
-    portfolio: Platform Engineering
-  - id: cicd
-    name: CI/CD & toolchain
-    layer: platform
-    portfolio: Platform Engineering
-  - id: model-access
-    name: Model access & gateway
-    layer: platform
-    portfolio: Platform Engineering
-
-  # --- the AI SDLC itself --------------------------------------------------
+propositions:
+  - id: platform-engineering
+    name: Platform Engineering
   - id: ai-sdlc
     name: AI SDLC
-    layer: capability
-    portfolio: Platform Engineering
-    kind: portfolio-item
-    note: Portfolio item inside Platform Engineering; built by DAE, used by CD.
-  - id: agents
-    name: Agents
-    layer: capability
-    parent: ai-sdlc
-  - id: guardrails
-    name: Guardrails
-    layer: capability
-    parent: ai-sdlc
-  - id: practices
-    name: AI best practices
-    layer: capability
-    parent: ai-sdlc
-  - id: sdlc-flow
-    name: The flow (golden path)
-    layer: capability
-    parent: ai-sdlc
-
-  # --- delivery use --------------------------------------------------------
-  - id: delivery-teams
-    name: Delivery teams & squads
-    layer: use
-  - id: ways-of-working
-    name: Ways of working
-    layer: use
-
-  # --- adoption ------------------------------------------------------------
-  - id: enablement
-    name: Enablement & training
-    layer: adoption
-  - id: adoption-metrics
-    name: Adoption measurement
-    layer: adoption
-
-  # --- cross-cutting: drawn as a rail beside all layers, never as a box with
-  #     eight arrows coming out of it.
   - id: observability
     name: Observability
-    crosscutting: true
-    note: Touches every layer; primary home is CD.
+  - id: cloud-landingzone
+    name: Cloud Landingzone
 
-# WHO does WHAT. item + division + role. Multiple rows per item is normal —
-# that is exactly the mix you are trying to make visible.
-responsibilities:
-  - {item: ai-sdlc,        division: PE,  role: govern, note: Portfolio home}
-  - {item: ai-sdlc,        division: DAE, role: build}
-  - {item: ai-sdlc,        division: CD,  role: use}
-  - {item: ai-sdlc,        division: STT, role: adopt}
+# proposition + division + expertise + role + what. One line per contribution;
+# this is the only list that grows as the picture gets richer.
+contributions:
+  # --- Platform Engineering ------------------------------------------------
+  - {proposition: platform-engineering, division: CD,  expertise: Platform Engineering,
+     role: build,   what: "Builds and runs the developer platform"}
+  - {proposition: platform-engineering, division: CD,  expertise: Software Engineering,
+     role: use,     what: "Builds and maintains applications on it"}
+  - {proposition: platform-engineering, division: DAE, expertise: Automation,
+     role: build,   what: "Automation building blocks", assumed: true}
+  - {proposition: platform-engineering, division: STT, expertise: Adoption,
+     role: adopt,   what: "Onboarding of teams onto the platform", assumed: true}
 
-  - {item: agents,         division: DAE, role: build}
-  - {item: agents,         division: SE,  role: po,     note: Teams act as PO of the agents}
-  - {item: agents,         division: CD,  role: use}
+  # --- AI SDLC (the one you described in full) -----------------------------
+  - {proposition: ai-sdlc, division: CD,  expertise: Cloud Engineering,
+     role: build,   what: "Delivers the cloud platform the AI SDLC runs on"}
+  - {proposition: ai-sdlc, division: CD,  expertise: Platform Engineering,
+     role: build,   what: "Pipelines, tooling and golden paths"}
+  - {proposition: ai-sdlc, division: CD,  expertise: Software Engineering,
+     role: use,     what: "Uses the AI SDLC and platform to build and maintain applications"}
+  - {proposition: ai-sdlc, division: DAE, expertise: AI,
+     role: build,   what: "Engineers who build agents, guardrails, MCP integration and flows"}
+  - {proposition: ai-sdlc, division: STT, expertise: Adoption,
+     role: adopt,   what: "Drives adoption and enablement across teams"}
+  - {proposition: ai-sdlc, division: STT, expertise: Security,
+     role: govern,  what: "Security requirements behind the guardrails", assumed: true}
 
-  - {item: guardrails,     division: DAE, role: build}
-  - {item: guardrails,     division: DAE, role: govern}
-  - {item: guardrails,     division: CD,  role: use}
+  # --- Observability -------------------------------------------------------
+  - {proposition: observability, division: CD,  expertise: Platform Engineering,
+     role: build,   what: "Telemetry pipeline and tooling", assumed: true}
+  - {proposition: observability, division: CD,  expertise: Software Engineering,
+     role: use,     what: "Instruments applications", assumed: true}
+  - {proposition: observability, division: DAE, expertise: Data Platform,
+     role: build,   what: "Stores and analyses the telemetry", assumed: true}
+  - {proposition: observability, division: STT, expertise: Security,
+     role: use,     what: "Consumes signals for security monitoring", assumed: true}
 
-  - {item: practices,      division: DAE, role: build}
-  - {item: practices,      division: SE,  role: use}
-  - {item: practices,      division: STT, role: adopt}
+  # --- Cloud Landingzone ---------------------------------------------------
+  - {proposition: cloud-landingzone, division: CD,  expertise: Cloud Engineering,
+     role: build,   what: "Builds and maintains the landing zone"}
+  - {proposition: cloud-landingzone, division: CD,  expertise: Platform Engineering,
+     role: use,     what: "The platform runs inside it", assumed: true}
+  - {proposition: cloud-landingzone, division: DAE, expertise: Data Platform,
+     role: use,     what: "Data platform lands in it", assumed: true}
+  - {proposition: cloud-landingzone, division: STT, expertise: Security,
+     role: govern,  what: "Security baseline, policies and controls", assumed: true}
 
-  - {item: sdlc-flow,      division: CD,  role: build}
-  - {item: sdlc-flow,      division: SE,  role: po,     note: Teams act as PO of the flow}
-  - {item: sdlc-flow,      division: CD,  role: operate}
-
-  - {item: observability,  division: CD,  role: build}
-  - {item: observability,  division: CD,  role: operate}
-  - {item: observability,  division: DAE, role: use}
-  - {item: observability,  division: SE,  role: use}
-  - {item: observability,  division: STT, role: use,    note: Source for adoption metrics}
-
-  - {item: delivery-teams, division: SE,  role: build}
-  - {item: delivery-teams, division: CD,  role: use}
-  - {item: ways-of-working, division: STT, role: adopt}
-  - {item: ways-of-working, division: SE,  role: use}
-
-  - {item: enablement,     division: STT, role: build}
-  - {item: enablement,     division: DAE, role: use}
-  - {item: adoption-metrics, division: STT, role: build}
-
-  - {item: idp,            division: PE,  role: build}
-  - {item: cicd,           division: PE,  role: build}
-  - {item: cicd,           division: CD,  role: use}
-  - {item: model-access,   division: PE,  role: build}
-  - {item: model-access,   division: DAE, role: use}
-
-# Item-to-item dependencies: what needs what. Keep the label a verb.
-dependencies:
-  - {from: model-access,  to: agents,          label: provides models to}
-  - {from: idp,           to: ai-sdlc,         label: hosts}
-  - {from: cicd,          to: sdlc-flow,       label: executes}
-  - {from: agents,        to: sdlc-flow,       label: plug into}
-  - {from: guardrails,    to: agents,          label: constrain}
-  - {from: practices,     to: sdlc-flow,       label: shape}
-  - {from: sdlc-flow,     to: delivery-teams,  label: used by}
-  - {from: delivery-teams, to: ways-of-working, label: follow}
-  - {from: enablement,    to: delivery-teams,  label: enables}
-  - {from: adoption-metrics, to: enablement,   label: steers}
-  - {from: observability, to: adoption-metrics, label: feeds}
-  - {from: delivery-teams, to: agents,         label: set direction for}
-
-# Division-to-division handoffs: the "we need each other" story, one line each.
-# This is the slide people actually argue about, so keep it under ~8 arrows.
-handoffs:
-  - {from: PE,  to: DAE, label: provides platform & portfolio home}
-  - {from: DAE, to: CD,  label: "delivers agents, guardrails, practices"}
-  - {from: CD,  to: SE,  label: runs the flow teams work in}
-  - {from: SE,  to: DAE, label: prioritises agents (PO role)}
-  - {from: SE,  to: CD,  label: prioritises the flow (PO role)}
-  - {from: STT, to: SE,  label: drives adoption & enablement}
-  - {from: CD,  to: STT, label: supplies observability & usage data}
+# The supply chain along the bottom of the page: who hands what to whom.
+# Keep it to four or five steps — it is a reading aid, not a process model.
+chain:
+  - {division: CD,  label: "Cloud platform & landing zone"}
+  - {division: DAE, label: "Agents, guardrails, MCP, flows"}
+  - {division: CD,  label: "Software engineering builds & maintains apps"}
+  - {division: STT, label: "Adoption, transformation & security"}

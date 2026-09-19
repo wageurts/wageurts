@@ -1,108 +1,86 @@
-# Portfolio, responsibility & dependency map
+# Portfolio overview — one page, one model
 
-A way to draw "the AI SDLC is a Platform Engineering portfolio item, DAE builds the
-agents and guardrails, CD uses and operates it, S&TT drives adoption, software
-engineering acts as PO of the agents and the flow, and observability is everywhere"
-— without ending up with a slide nobody dares to touch.
+One diagram that carries all three dimensions at once: **propositions** (rows),
+**divisions** (columns) and **responsibilities** (the coloured chips in the cells,
+each naming the expertise that does the work). A supply-chain strip along the
+bottom answers the fourth question — how the divisions need each other.
 
-## The idea in one line
+Everything is generated from [`model.yaml`](model.yaml) by `python render.py`.
 
-**One model, three views.** Everything lives in [`model.yaml`](model.yaml); the
-diagrams, the matrix and the PowerPoint deck are generated from it and are
-disposable.
+## Why a grid and not a box-and-arrow drawing
 
-## Why three views and not one picture
+Divisions × propositions is a many-to-many relation, and many-to-many drawn with
+arrows is spaghetti: four propositions and three divisions would already need
+eighteen crossing lines. A grid shows the same eighteen facts with no lines at
+all, and it has room for *what* each division contributes — not just a RACI
+letter.
 
-The three things you are trying to show answer different questions, and each one
-wants a different shape. Forcing them into a single chart is what makes these
-diagrams unreadable and then unmaintainable.
+Three rules keep the page readable:
 
-| Question | View | Shape | Rule |
-|---|---|---|---|
-| What exists? | Capability map | Layers, boxes nested by portfolio item | Colour = the division that **builds** it. One colour per division, never per item type. |
-| Who does what? | Responsibility matrix | Grid: rows = items, columns = divisions | Every many-to-many relation goes here. A cell with two role codes is the point, not a mistake. |
-| Who needs whom? | Value flow | One arrow per handoff, labelled with a verb | Hard cap of ~8 arrows. More than that means it belongs in the matrix. |
+* **Colour means one thing: the role.** Blue builds, green uses, orange governs,
+  violet drives adoption. Divisions are already encoded by column, so they do not
+  need a second colour dimension (the header bands are labels, not data).
+* **Every chip names an expertise.** "C&D" is too coarse to act on; "Cloud
+  Engineering — delivers the cloud platform the AI SDLC runs on" is a commitment.
+  Validation enforces that the expertise actually belongs to that division.
+* **An empty cell is a statement**, not an oversight: that division has no role in
+  that proposition.
 
-Three conventions keep it honest:
+The AI SDLC row is the case that made this necessary: C&D contributes twice
+(Cloud Engineering builds the platform it runs on, Software Engineering *uses* it
+to build and maintain applications), DA&E builds the agents, guardrails, MCP
+integration and flows, and S&TT drives adoption. Four different relationships to
+one proposition, in one row, with no crossing arrows.
 
-* **Colour carries exactly one meaning: ownership** (who builds and maintains).
-  Use, adoption, governance and PO-ship are *roles*, and roles live in the matrix,
-  not in more colours.
-* **Cross-cutting things get a rail, not arrows.** Observability touches every
-  layer; drawn as a box with nine arrows it destroys the diagram, drawn as a band
-  down the side it reads in one second. Its owner (CD) still shows in the matrix.
-* **Arrows mean dependency, and they are labelled with a verb** — "provides models
-  to", "plug into", "drives adoption of". An unlabelled arrow is a disagreement
-  waiting to happen.
+## Keeping it maintainable
 
-The hard case in your setup — the AI SDLC built by DAE, used by CD, adopted via
-S&TT, with software engineering as PO — is exactly what the matrix is for. In the
-capability map the AI SDLC is one purple (DAE) box; the row for it in the matrix
-carries `G` for PE, `B` for DAE, `U` for CD and `A` for S&TT. Nothing is lost and
-no arrow is drawn.
+The slide is an output; `model.yaml` is the source.
 
-## Maintainability: why a text model instead of drawing
-
-The deck and the drawing are *outputs*. The model is the source, which means:
-
-* a change is a one-line edit, not twenty minutes of nudging shapes;
-* `git diff` on `model.yaml` is the record of who decided what, when;
-* `python render.py --check` fails on a typo (unknown division, dangling
-  dependency) before it reaches a slide;
-* the same facts feed PowerPoint, draw.io, Mermaid and a CSV — no "which version is
-  current?".
-
-Shapes in the generated `.pptx` are **native PowerPoint shapes and connectors**, not
-images. Anyone can drag a box in the meeting; the arrows stay glued. The rule is:
-nudges are disposable, the model is not — when the content changes, regenerate and
-replace the slide rather than patching it.
+* One layout engine (`layout.py`) feeds all three renderers, so the PowerPoint,
+  the draw.io drawing and the SVG preview cannot drift apart.
+* `python render.py --check` refuses a model with an unknown division, an
+  expertise that division does not have, or the classic YAML trap of an unquoted
+  comma swallowing half a sentence.
+* `git diff model.yaml` is the record of who decided what.
+* Shapes in the `.pptx` are **native PowerPoint shapes**, so anyone can nudge them
+  in the meeting — but nudges are disposable and the model is not. When the
+  content changes, regenerate and replace the slide.
 
 ## Usage
 
 ```bash
 pip install -r requirements.txt
-python render.py --check    # validate the model
-python render.py            # regenerate everything into ./out
-# or: make check / make all
+python render.py --check    # validate
+python render.py            # regenerate ./out
 ```
 
-## Outputs
+| Output | Use |
+|---|---|
+| `out/portfolio-overview.pptx` | The slide. One page, native shapes. |
+| `out/portfolio-overview.drawio` | Open in draw.io / diagrams.net to edit by hand or export SVG/VSDX. |
+| `out/portfolio-overview.svg` | Preview in a browser, a wiki or the repo. |
+| `out/contribution-matrix.csv` | The same facts for Excel or a PowerPoint table. |
+| `out/contribution-matrix.md` | The same facts, readable in the repo. |
 
-| File | What it is | How to use it |
-|---|---|---|
-| `out/portfolio-map.pptx` | 5-slide deck, native editable shapes | The meeting artefact. Regenerate, don't repaint. |
-| `out/portfolio-map.drawio` | Ready-to-open draw.io / diagrams.net file | For whiteboard-style editing; exports to editable VSDX or SVG for PowerPoint. |
-| `out/drawio-import.csv` | draw.io CSV import spec | In draw.io: *Extras → Insert → Advanced → CSV*. Auto-layout, so the picture survives model growth. |
-| `out/capability-map.mmd` | Mermaid — what exists | Renders in GitHub, Confluence, Notion, most wikis. |
-| `out/dependency-flow.mmd` | Mermaid — what needs what | Kept separate on purpose (see below). |
-| `out/value-flow.mmd` | Mermaid — who needs whom | The division-level story. |
-| `out/responsibility-matrix.md` / `.csv` | The RACI-style grid | Paste the CSV into Excel or PowerPoint; the `.md` renders in the repo. |
-
-A note on Mermaid: it ignores a subgraph's `direction` as soon as an arrow crosses
-a subgraph boundary, so the structure view carries no dependency arrows and the
-dependencies get their own diagram. draw.io and PowerPoint place shapes explicitly,
-so there both live on one page.
-
-## Editing the model
+## Editing
 
 ```yaml
-items:
-  - id: evals                 # stable id, referenced everywhere else
-    name: Evaluation harness
-    layer: capability         # one of the layers listed at the top of the file
-    parent: ai-sdlc           # optional: it is part of a bigger portfolio item
-
-responsibilities:
-  - {item: evals, division: DAE, role: build}
-  - {item: evals, division: CD,  role: use}
-
-dependencies:
-  - {from: evals, to: sdlc-flow, label: gates}
+contributions:
+  - {proposition: ai-sdlc, division: DAE, expertise: AI,
+     role: build, what: "Engineers who build agents, guardrails, MCP integration and flows"}
 ```
 
-Roles: `build` (B), `po` (P), `use` (U), `adopt` (A), `govern` (G), `operate` (O).
-Six is already the practical maximum for a readable matrix — resist adding a
-seventh; if a distinction only matters to one team, put it in the `note:` field.
+Always quote the text after `what:` and `label:` — an unquoted comma inside a
+`{...}` entry silently turns the rest of the sentence into a new key. The
+validator catches it, but quoting avoids the round trip.
 
-The division long names in `model.yaml` are marked `TODO: confirm` — fill in the
-official expansions of DAE, CD and S&TT.
+Roles: `build` (B), `use` (U), `operate` (O), `govern` (G), `adopt` (A). The
+legend only shows the roles actually used on the page.
+
+## Open question
+
+Contributions marked `assumed: true` are my inference, not something you stated —
+they draw with a dashed border and an "(assumed)" tag so they are obvious in a
+review. The AI SDLC row is as you described it; Platform Engineering,
+Observability and Cloud Landingzone are first drafts. Confirm them, correct them,
+or delete the line.

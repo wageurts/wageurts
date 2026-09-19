@@ -1,18 +1,15 @@
 #!/usr/bin/env python3
-"""Render model.yaml into the three views, in every format we need.
+"""Render model.yaml into the one-page portfolio overview.
 
-    python render.py            # everything into ./out
+    python render.py            # regenerate everything into ./out
     python render.py --check    # validate the model only
 
-Outputs
-    out/capability-map.mmd          Mermaid  — view 1, what exists
-    out/dependency-flow.mmd         Mermaid  — view 1b, what needs what
-    out/value-flow.mmd              Mermaid  — view 3, who needs who
-    out/responsibility-matrix.md    Markdown — view 2, who does what
-    out/responsibility-matrix.csv   CSV      — same, for Excel/PowerPoint
-    out/portfolio-map.drawio        draw.io  — open directly, edit by hand
-    out/drawio-import.csv           draw.io  — Extras > Insert > Advanced > CSV
-    out/portfolio-map.pptx          PowerPoint, native editable shapes
+Outputs (all from one layout, so they cannot drift apart)
+    out/portfolio-overview.pptx    one slide, native editable shapes
+    out/portfolio-overview.drawio  draw.io / diagrams.net drawing
+    out/portfolio-overview.svg     preview — renders in a browser and in GitHub
+    out/contribution-matrix.csv    the same facts as a grid, for Excel
+    out/contribution-matrix.md     the same facts, rendered in the repo
 """
 from __future__ import annotations
 
@@ -20,345 +17,132 @@ import argparse
 import csv
 import pathlib
 import sys
-from xml.sax.saxutils import escape
 
 import yaml
 
+import drawio_view
+import layout
+import svg_view
+
 HERE = pathlib.Path(__file__).parent
-OUT = HERE / "out"
-GREY = "#868E96"
+CONTRIBUTION_KEYS = {"proposition", "division", "expertise", "role", "what", "assumed"}
 
 
-# --------------------------------------------------------------------------- model
 class Model:
     def __init__(self, raw: dict):
         self.meta = raw.get("meta", {})
-        self.layers = raw["layers"]
         self.divisions = raw["divisions"]
         self.roles = raw["roles"]
-        self.items = raw["items"]
-        self.responsibilities = raw.get("responsibilities", [])
-        self.dependencies = raw.get("dependencies", [])
-        self.handoffs = raw.get("handoffs", [])
-
+        self.propositions = raw["propositions"]
+        self.contributions = raw["contributions"]
+        self.chain = raw.get("chain", [])
         self.div = {d["id"]: d for d in self.divisions}
         self.role = {r["id"]: r for r in self.roles}
-        self.item = {i["id"]: i for i in self.items}
-        self.layer = {l["id"]: l for l in self.layers}
+        self.prop = {p["id"]: p for p in self.propositions}
 
     def validate(self) -> list[str]:
         errs = []
-        for i in self.items:
-            if not i.get("crosscutting") and i["layer"] not in self.layer:
-                errs.append(f"item {i['id']}: unknown layer {i['layer']}")
-            if i.get("parent") and i["parent"] not in self.item:
-                errs.append(f"item {i['id']}: unknown parent {i['parent']}")
-        for r in self.responsibilities:
-            if r["item"] not in self.item:
-                errs.append(f"responsibility: unknown item {r['item']}")
-            if r["division"] not in self.div:
-                errs.append(f"responsibility: unknown division {r['division']}")
-            if r["role"] not in self.role:
-                errs.append(f"responsibility: unknown role {r['role']}")
-        for name, edges in (("dependency", self.dependencies), ("handoff", self.handoffs)):
-            lookup = self.item if name == "dependency" else self.div
-            for e in edges:
-                for side in ("from", "to"):
-                    if e[side] not in lookup:
-                        errs.append(f"{name}: unknown {side} {e[side]}")
+        for n, c in enumerate(self.contributions, start=1):
+            stray = set(c) - CONTRIBUTION_KEYS
+            if stray:
+                # Almost always an unquoted comma inside `what:` — YAML then
+                # reads the rest of the sentence as another key.
+                errs.append(f"contribution {n}: unexpected key(s) {sorted(stray)} "
+                            f"— quote the text after `what:`")
+                continue
+            if c["proposition"] not in self.prop:
+                errs.append(f"contribution {n}: unknown proposition {c['proposition']}")
+            if c["division"] not in self.div:
+                errs.append(f"contribution {n}: unknown division {c['division']}")
+            elif c["expertise"] not in self.div[c["division"]]["expertise"]:
+                errs.append(f"contribution {n}: {c['division']} has no expertise "
+                            f"{c['expertise']!r}")
+            if c["role"] not in self.role:
+                errs.append(f"contribution {n}: unknown role {c['role']}")
+        for n, step in enumerate(self.chain, start=1):
+            stray = set(step) - {"division", "label"}
+            if stray:
+                errs.append(f"chain step {n}: unexpected key(s) {sorted(stray)} "
+                            f"— quote the text after `label:`")
+            elif step["division"] not in self.div:
+                errs.append(f"chain step {n}: unknown division {step['division']}")
         return errs
 
-    def owner(self, item_id: str) -> str | None:
-        """The division that builds an item — drives the colour of its box."""
-        for r in self.responsibilities:
-            if r["item"] == item_id and r["role"] == "build":
-                return r["division"]
-        return None
-
-    def color(self, item_id: str) -> str:
-        o = self.owner(item_id)
-        return self.div[o]["color"] if o else GREY
-
-    def roles_on(self, item_id: str, division: str) -> list[str]:
-        return [r["role"] for r in self.responsibilities
-                if r["item"] == item_id and r["division"] == division]
-
-    def items_in(self, layer_id: str) -> list[dict]:
-        return [i for i in self.items
-                if not i.get("crosscutting") and i.get("layer") == layer_id]
-
-    @property
-    def crosscutting(self) -> list[dict]:
-        return [i for i in self.items if i.get("crosscutting")]
-
-    @property
-    def matrix_items(self) -> list[dict]:
-        """Items in drawing order, cross-cutting last."""
-        ordered = [i for l in self.layers for i in self.items_in(l["id"])]
-        return ordered + self.crosscutting
-
-
-# --------------------------------------------------------------------------- mermaid
-def mermaid_capability(m: Model) -> str:
-    """Structure only — deliberately no dependency arrows.
-
-    Two Mermaid facts drive the shape of this output:
-      * a subgraph's `direction` is ignored as soon as an edge crosses its
-        boundary, so dependency arrows would flatten the layer bands into
-        spaghetti — they get their own diagram instead;
-      * disconnected subgraphs are placed in an undefined order, so the layers
-        are chained with invisible links (`~~~`) to pin them down.
-
-    Result: one column per layer, foundation on the left, adoption on the
-    right, boxes coloured by the division that builds them.
-    """
-    out = ["%% generated by render.py — edit model.yaml, not this file",
-           "flowchart LR"]
-    bottom_up = list(reversed(m.layers))
-    for layer in bottom_up:
-        out.append(f'  subgraph {layer["id"]}["{layer["name"]}"]')
-        for i in m.items_in(layer["id"]):
-            owner = m.owner(i["id"])
-            tag = f"<br/><small>{owner}</small>" if owner else ""
-            out.append(f'    {i["id"]}["{i["name"]}{tag}"]')
-        out.append("  end")
-    for i in m.crosscutting:
-        out.append(f'  {i["id"]}[/"{i["name"]}<br/><small>cuts across every layer</small>"/]')
-    out.append("")
-    chain = [l["id"] for l in bottom_up] + [i["id"] for i in m.crosscutting]
-    out.append("  %% invisible links: pin the layer order, draw no arrows")
-    out.append("  " + " ~~~ ".join(chain))
-    out.append("")
-    for i in m.items:
-        out.append(f'  style {i["id"]} fill:{m.color(i["id"])},stroke:#343A40,color:#FFFFFF')
-    return "\n".join(out) + "\n"
-
-
-def mermaid_dependencies(m: Model) -> str:
-    out = ["%% generated by render.py — edit model.yaml, not this file",
-           "flowchart LR"]
-    seen = {e[side] for e in m.dependencies for side in ("from", "to")}
-    for i in m.items:
-        if i["id"] in seen:
-            owner = m.owner(i["id"])
-            tag = f"<br/><small>{owner}</small>" if owner else ""
-            out.append(f'  {i["id"]}["{i["name"]}{tag}"]')
-    out.append("")
-    for d in m.dependencies:
-        out.append(f'  {d["from"]} -->|"{d["label"]}"| {d["to"]}')
-    out.append("")
-    for i in m.items:
-        if i["id"] in seen:
-            out.append(f'  style {i["id"]} fill:{m.color(i["id"])},stroke:#343A40,color:#FFFFFF')
-    return "\n".join(out) + "\n"
-
-
-def mermaid_flow(m: Model) -> str:
-    out = ["%% generated by render.py — edit model.yaml, not this file",
-           "flowchart LR"]
-    for d in m.divisions:
-        label = d.get("long_name", d["name"])
-        out.append(f'  {d["id"]}["{d["name"]}<br/><small>{label}</small>"]')
-    out.append("")
-    for h in m.handoffs:
-        out.append(f'  {h["from"]} -->|"{h["label"]}"| {h["to"]}')
-    out.append("")
-    for d in m.divisions:
-        out.append(f'  style {d["id"]} fill:{d["color"]},stroke:#343A40,color:#FFFFFF')
-    return "\n".join(out) + "\n"
-
-
-# --------------------------------------------------------------------------- matrix
-def matrix_rows(m: Model) -> tuple[list[str], list[list[str]]]:
-    header = ["Portfolio item"] + [d["name"] for d in m.divisions]
-    rows = []
-    for i in m.matrix_items:
-        row = [i["name"]]
-        for d in m.divisions:
-            codes = [m.role[r]["code"] for r in m.roles_on(i["id"], d["id"])]
-            row.append(" ".join(codes))
-        rows.append(row)
-    return header, rows
-
-
-def matrix_markdown(m: Model) -> str:
-    header, rows = matrix_rows(m)
-    out = [f'# {m.meta.get("title", "Responsibility matrix")}',
-           "",
-           "Generated by `render.py` — edit `model.yaml`.",
-           "",
-           "| " + " | ".join(header) + " |",
-           "|" + "|".join(["---"] * len(header)) + "|"]
-    for r in rows:
-        out.append("| " + " | ".join(r) + " |")
-    out += ["", "## Roles", ""]
-    for r in m.roles:
-        out.append(f'- **{r["code"]}** — {r["label"]}: {r["definition"]}')
-    out += ["", "## Divisions", ""]
-    for d in m.divisions:
-        out.append(f'- **{d["name"]}** — {d.get("long_name", d["name"])}')
-    return "\n".join(out) + "\n"
+    def contributions_for(self, proposition: str, division: str) -> list[dict]:
+        return [c for c in self.contributions
+                if c["proposition"] == proposition and c["division"] == division]
 
 
 def matrix_csv(m: Model, path: pathlib.Path) -> None:
-    header, rows = matrix_rows(m)
     with path.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
-        w.writerow(header)
-        w.writerows(rows)
+        w.writerow(["Proposition", "Division", "Expertise", "Role", "Contribution",
+                    "Confirmed"])
+        for p in m.propositions:
+            for d in m.divisions:
+                for c in m.contributions_for(p["id"], d["id"]):
+                    w.writerow([p["name"], d["short"], c["expertise"],
+                                m.role[c["role"]]["label"], c["what"],
+                                "assumed" if c.get("assumed") else "yes"])
 
 
-# --------------------------------------------------------------------------- draw.io
-def drawio_import_csv(m: Model) -> str:
-    """draw.io: Extras > Insert > Advanced > CSV. Paste, edit, re-import."""
-    head = [
-        "## Paste into draw.io: Extras > Insert > Advanced > CSV",
-        "## Generated by render.py — regenerate rather than hand-editing.",
-        "#",
-        "# label: %name%",
-        "# style: rounded=1;whiteSpace=wrap;html=1;fillColor=%fill%;strokeColor=#343A40;fontColor=#FFFFFF;",
-        "# namespace: pf-",
-        '# connect: {"from": "depends_on", "to": "id", "invert": true, '
-        '"style": "edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;"}',
-        "# width: 180",
-        "# height: 60",
-        "# padding: 12",
-        "# nodespacing: 30",
-        "# levelspacing: 60",
-        "# layout: verticalflow",
-        "#",
-        "id,name,fill,owner,layer,depends_on",
-    ]
-    rows = []
-    for i in m.items:
-        deps = [d["from"] for d in m.dependencies if d["to"] == i["id"]]
-        rows.append(",".join([
-            i["id"],
-            f'"{i["name"]}"',
-            m.color(i["id"]),
-            m.owner(i["id"]) or "",
-            i.get("layer", "cross-cutting"),
-            f'"{",".join(deps)}"',
-        ]))
-    return "\n".join(head + rows) + "\n"
-
-
-def drawio_xml(m: Model) -> str:
-    """A ready-to-open .drawio file: layer bands, boxes, dependency edges."""
-    LW, LH, BW, BH, GAP = 1100, 150, 200, 70, 30
-    cells = []
-    nid = [2]
-
-    def cell(xml: str) -> None:
-        cells.append("        " + xml)
-
-    def nxt() -> str:
-        nid[0] += 1
-        return f"n{nid[0]}"
-
-    ids = {}
-    y = 40
-    for layer in m.layers:
-        lid = nxt()
-        cell(f'<mxCell id="{lid}" value="{escape(layer["name"])}" '
-             f'style="swimlane;horizontal=0;html=1;startSize=30;fillColor=#F1F3F5;'
-             f'strokeColor=#CED4DA;fontColor=#495057;fontSize=14;" vertex="1" parent="1">'
-             f'<mxGeometry x="40" y="{y}" width="{LW}" height="{LH}" as="geometry"/></mxCell>')
-        x = 60
-        for item in m.items_in(layer["id"]):
-            bid = nxt()
-            ids[item["id"]] = bid
-            owner = m.owner(item["id"])
-            label = item["name"] + (f"\n{owner}" if owner else "")
-            cell(f'<mxCell id="{bid}" value="{escape(label)}" '
-                 f'style="rounded=1;whiteSpace=wrap;html=1;fillColor={m.color(item["id"])};'
-                 f'strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="{lid}">'
-                 f'<mxGeometry x="{x}" y="{(LH - BH) // 2}" width="{BW}" height="{BH}" '
-                 f'as="geometry"/></mxCell>')
-            x += BW + GAP
-        y += LH + 20
-
-    rail_h = y - 60
-    for item in m.crosscutting:
-        bid = nxt()
-        ids[item["id"]] = bid
-        cell(f'<mxCell id="{bid}" value="{escape(item["name"])}" '
-             f'style="rounded=1;whiteSpace=wrap;html=1;horizontal=0;fillColor={m.color(item["id"])};'
-             f'strokeColor=#343A40;fontColor=#FFFFFF;" vertex="1" parent="1">'
-             f'<mxGeometry x="{40 + LW + 20}" y="40" width="70" height="{rail_h}" '
-             f'as="geometry"/></mxCell>')
-
-    for d in m.dependencies:
-        src, tgt = ids.get(d["from"]), ids.get(d["to"])
-        if not src or not tgt:
-            continue
-        eid = nxt()
-        cell(f'<mxCell id="{eid}" value="{escape(d["label"])}" '
-             f'style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;'
-             f'strokeColor=#495057;" edge="1" parent="1" source="{src}" target="{tgt}">'
-             f'<mxGeometry relative="1" as="geometry"/></mxCell>')
-
-    body = "\n".join(cells)
-    return (
-        '<mxfile host="render.py">\n'
-        f'  <diagram name="{escape(m.meta.get("title", "Portfolio map"))}">\n'
-        '    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" page="1" '
-        'pageWidth="1600" pageHeight="1200" math="0" shadow="0">\n'
-        '      <root>\n'
-        '        <mxCell id="0"/>\n'
-        '        <mxCell id="1" parent="0"/>\n'
-        f'{body}\n'
-        '      </root>\n'
-        '    </mxGraphModel>\n'
-        '  </diagram>\n'
-        '</mxfile>\n'
-    )
+def matrix_markdown(m: Model) -> str:
+    out = [f'# {m.meta.get("title", "Portfolio overview")}', "",
+           "Generated by `render.py` — edit `model.yaml`.", "",
+           "| Proposition | " + " | ".join(d["short"] for d in m.divisions) + " |",
+           "|" + "|".join(["---"] * (len(m.divisions) + 1)) + "|"]
+    for p in m.propositions:
+        row = [p["name"]]
+        for d in m.divisions:
+            cell = [f'{m.role[c["role"]]["code"]} {c["expertise"]}: {c["what"]}'
+                    + (" *(assumed)*" if c.get("assumed") else "")
+                    for c in m.contributions_for(p["id"], d["id"])]
+            row.append("<br>".join(cell) or "—")
+        out.append("| " + " | ".join(row) + " |")
+    out += ["", "## Roles", ""]
+    out += [f'- **{r["code"]}** — {r["label"]}' for r in m.roles]
+    out += ["", "## Divisions", ""]
+    out += [f'- **{d["short"]}** {d["name"]} — {", ".join(d["expertise"])}'
+            for d in m.divisions]
+    return "\n".join(out) + "\n"
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--model", default=str(HERE / "model.yaml"))
-    ap.add_argument("--out", default=str(OUT))
-    ap.add_argument("--check", action="store_true", help="validate the model and stop")
-    ap.add_argument("--no-pptx", action="store_true", help="skip the PowerPoint deck")
+    ap.add_argument("--out", default=str(HERE / "out"))
+    ap.add_argument("--check", action="store_true", help="validate and stop")
+    ap.add_argument("--no-pptx", action="store_true")
     args = ap.parse_args()
 
     m = Model(yaml.safe_load(pathlib.Path(args.model).read_text(encoding="utf-8")))
     errs = m.validate()
+    for e in errs:
+        print(f"error: {e}", file=sys.stderr)
     if errs:
-        for e in errs:
-            print(f"error: {e}", file=sys.stderr)
         return 1
+    assumed = sum(1 for c in m.contributions if c.get("assumed"))
     if args.check:
-        print(f"model ok — {len(m.items)} items, {len(m.responsibilities)} responsibilities, "
-              f"{len(m.dependencies)} dependencies, {len(m.handoffs)} handoffs")
+        print(f"model ok — {len(m.propositions)} propositions, {len(m.divisions)} "
+              f"divisions, {len(m.contributions)} contributions ({assumed} assumed)")
         return 0
 
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    (out / "capability-map.mmd").write_text(mermaid_capability(m), encoding="utf-8")
-    (out / "dependency-flow.mmd").write_text(mermaid_dependencies(m), encoding="utf-8")
-    (out / "value-flow.mmd").write_text(mermaid_flow(m), encoding="utf-8")
-    (out / "responsibility-matrix.md").write_text(matrix_markdown(m), encoding="utf-8")
-    matrix_csv(m, out / "responsibility-matrix.csv")
-    (out / "drawio-import.csv").write_text(drawio_import_csv(m), encoding="utf-8")
-    (out / "portfolio-map.drawio").write_text(drawio_xml(m), encoding="utf-8")
-    written = ["capability-map.mmd", "dependency-flow.mmd", "value-flow.mmd",
-               "responsibility-matrix.md",
-               "responsibility-matrix.csv", "drawio-import.csv", "portfolio-map.drawio"]
-
+    page = layout.build(m)
+    written = [svg_view.write(page, out / "portfolio-overview.svg"),
+               drawio_view.write(page, out / "portfolio-overview.drawio")]
+    matrix_csv(m, out / "contribution-matrix.csv")
+    (out / "contribution-matrix.md").write_text(matrix_markdown(m), encoding="utf-8")
+    written += [out / "contribution-matrix.csv", out / "contribution-matrix.md"]
     if not args.no_pptx:
-        try:
-            from pptx_view import build_deck
-        except ImportError as exc:  # pragma: no cover
-            print(f"note: skipping PowerPoint ({exc})", file=sys.stderr)
-        else:
-            build_deck(m, out / "portfolio-map.pptx")
-            written.append("portfolio-map.pptx")
-
+        import pptx_view
+        written.append(pptx_view.build(page, out / "portfolio-overview.pptx"))
     for w in written:
-        print(f"wrote {out / w}")
+        print(f"wrote {w}")
+    if assumed:
+        print(f"note: {assumed} contributions are marked `assumed` — confirm or remove them")
     return 0
 
 

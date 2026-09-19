@@ -1,0 +1,19 @@
+Proposition,Division,Expertise,Role,Contribution,Confirmed
+Platform Engineering,C&D,Platform Engineering,Builds & delivers,Builds and runs the developer platform,yes
+Platform Engineering,C&D,Software Engineering,Uses,Builds and maintains applications on it,yes
+Platform Engineering,DA&E,Automation,Builds & delivers,Automation building blocks,assumed
+Platform Engineering,S&TT,Adoption,Drives adoption,Onboarding of teams onto the platform,assumed
+AI SDLC,C&D,Cloud Engineering,Builds & delivers,Delivers the cloud platform the AI SDLC runs on,yes
+AI SDLC,C&D,Platform Engineering,Builds & delivers,"Pipelines, tooling and golden paths",yes
+AI SDLC,C&D,Software Engineering,Uses,Uses the AI SDLC and platform to build and maintain applications,yes
+AI SDLC,DA&E,AI,Builds & delivers,"Engineers who build agents, guardrails, MCP integration and flows",yes
+AI SDLC,S&TT,Adoption,Drives adoption,Drives adoption and enablement across teams,yes
+AI SDLC,S&TT,Security,Governs,Security requirements behind the guardrails,assumed
+Observability,C&D,Platform Engineering,Builds & delivers,Telemetry pipeline and tooling,assumed
+Observability,C&D,Software Engineering,Uses,Instruments applications,assumed
+Observability,DA&E,Data Platform,Builds & delivers,Stores and analyses the telemetry,assumed
+Observability,S&TT,Security,Uses,Consumes signals for security monitoring,assumed
+Cloud Landingzone,C&D,Cloud Engineering,Builds & delivers,Builds and maintains the landing zone,yes
+Cloud Landingzone,C&D,Platform Engineering,Uses,The platform runs inside it,assumed
+Cloud Landingzone,DA&E,Data Platform,Uses,Data platform lands in it,assumed
+Cloud Landingzone,S&TT,Security,Governs,"Security baseline, policies and controls",assumed

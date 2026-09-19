@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Segoe UI, Calibri, Helvetica, Arial, sans-serif">
+<rect width="960.0" height="540.0" fill="#FFFFFF"/>
+<rect x="848.0" y="22.0" width="9.0" height="9.0" rx="2" fill="#7048E8"/>
+<text x="861.0" y="29.2" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Drives adoption</text>
+<rect x="791.2" y="22.0" width="9.0" height="9.0" rx="2" fill="#E8590C"/>
+<text x="804.2" y="29.2" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Governs</text>
+<rect x="747.6" y="22.0" width="9.0" height="9.0" rx="2" fill="#0CA678"/>
+<text x="760.6" y="29.2" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Uses</text>
+<rect x="646.8" y="22.0" width="9.0" height="9.0" rx="2" fill="#1C7ED6"/>
+<text x="659.8" y="29.2" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Builds &amp; delivers</text>
+<text x="20.0" y="31.6" font-size="18" font-weight="600" fill="#212529" text-anchor="start">Portfolio overview — who does what</text>
+<text x="20.0" y="46.3" font-size="9.5" font-weight="400" fill="#868E96" text-anchor="start">Rows are propositions · columns are divisions · colour is the role</text>
+<text x="20.0" y="82.8" font-size="9" font-weight="600" fill="#868E96" text-anchor="start">Propositions</text>
+<rect x="160.0" y="62.0" width="254.7" height="44.0" rx="4" fill="#0B7285"/>
+<text x="168.0" y="77.3" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="start">Cloud &amp; Development  (C&amp;D)</text>
+<text x="168.0" y="87.8" font-size="7.5" font-weight="400" fill="#C9E0E4" text-anchor="start">Software Engineering · Cloud Engineering · Platform Engineering</text>
+<text x="168.0" y="97.4" font-size="7.5" font-weight="400" fill="#C9E0E4" text-anchor="start">· Workplace Management</text>
+<rect x="422.7" y="62.0" width="254.7" height="44.0" rx="4" fill="#5F3DC4"/>
+<text x="430.7" y="77.3" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="start">Data, AI &amp; Engagement  (DA&amp;E)</text>
+<text x="430.7" y="87.8" font-size="7.5" font-weight="400" fill="#DCD4F2" text-anchor="start">Data Management · Data Platform · AI · Automation</text>
+<rect x="685.3" y="62.0" width="254.7" height="44.0" rx="4" fill="#A61E4D"/>
+<text x="693.3" y="77.3" font-size="10.5" font-weight="600" fill="#FFFFFF" text-anchor="start">Security &amp; Technology Transformation  (S&amp;TT)</text>
+<text x="693.3" y="87.8" font-size="7.5" font-weight="400" fill="#EBCED8" text-anchor="start">Transformation · Adoption · Security</text>
+<rect x="20.0" y="112.0" width="132.0" height="73.2" rx="4" fill="#F8F9FA" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="30.0" y="152.5" font-size="11.5" font-weight="600" fill="#212529" text-anchor="start">Platform Engineering</text>
+<rect x="160.0" y="112.0" width="254.7" height="73.2" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="168.0" y="118.0" width="238.7" height="29.5" rx="3" fill="#E8F2FB" stroke="#99C5ED" stroke-width="0.8"/>
+<rect x="168.0" y="118.0" width="3.5" height="29.5" rx="1" fill="#1C7ED6"/>
+<text x="177.0" y="130.3" font-size="8.5" font-weight="600" fill="#1C7ED6" text-anchor="start">Platform Engineering</text>
+<text x="177.0" y="140.2" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Builds and runs the developer platform</text>
+<rect x="168.0" y="152.5" width="238.7" height="29.5" rx="3" fill="#E7F6F2" stroke="#92D7C2" stroke-width="0.8"/>
+<rect x="168.0" y="152.5" width="3.5" height="29.5" rx="1" fill="#0CA678"/>
+<text x="177.0" y="164.8" font-size="8.5" font-weight="600" fill="#0CA678" text-anchor="start">Software Engineering</text>
+<text x="177.0" y="174.7" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Builds and maintains applications on it</text>
+<rect x="422.7" y="112.0" width="254.7" height="73.2" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="430.7" y="118.0" width="238.7" height="29.5" rx="3" fill="#E8F2FB" stroke="#99C5ED" stroke-width="0.8" stroke-dasharray="3 2"/>
+<rect x="430.7" y="118.0" width="3.5" height="29.5" rx="1" fill="#1C7ED6"/>
+<text x="439.7" y="130.3" font-size="8.5" font-weight="600" fill="#1C7ED6" text-anchor="start">Automation  (assumed)</text>
+<text x="439.7" y="140.2" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Automation building blocks</text>
+<rect x="685.3" y="112.0" width="254.7" height="73.2" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="693.3" y="118.0" width="238.7" height="29.5" rx="3" fill="#F1EDFD" stroke="#BFADF5" stroke-width="0.8" stroke-dasharray="3 2"/>
+<rect x="693.3" y="118.0" width="3.5" height="29.5" rx="1" fill="#7048E8"/>
+<text x="702.3" y="130.3" font-size="8.5" font-weight="600" fill="#7048E8" text-anchor="start">Adoption  (assumed)</text>
+<text x="702.3" y="140.2" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Onboarding of teams onto the platform</text>
+<rect x="20.0" y="191.2" width="132.0" height="106.4" rx="4" fill="#F8F9FA" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="30.0" y="248.3" font-size="11.5" font-weight="600" fill="#212529" text-anchor="start">AI SDLC</text>
+<rect x="160.0" y="191.2" width="254.7" height="106.4" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="168.0" y="197.2" width="238.7" height="29.5" rx="3" fill="#E8F2FB" stroke="#99C5ED" stroke-width="0.8"/>
+<rect x="168.0" y="197.2" width="3.5" height="29.5" rx="1" fill="#1C7ED6"/>
+<text x="177.0" y="209.5" font-size="8.5" font-weight="600" fill="#1C7ED6" text-anchor="start">Cloud Engineering</text>
+<text x="177.0" y="219.4" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Delivers the cloud platform the AI SDLC runs on</text>
+<rect x="168.0" y="231.7" width="238.7" height="29.5" rx="3" fill="#E8F2FB" stroke="#99C5ED" stroke-width="0.8"/>
+<rect x="168.0" y="231.7" width="3.5" height="29.5" rx="1" fill="#1C7ED6"/>
+<text x="177.0" y="244.0" font-size="8.5" font-weight="600" fill="#1C7ED6" text-anchor="start">Platform Engineering</text>
+<text x="177.0" y="253.9" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Pipelines, tooling and golden paths</text>
+<rect x="168.0" y="266.2" width="238.7" height="29.5" rx="3" fill="#E7F6F2" stroke="#92D7C2" stroke-width="0.8"/>
+<rect x="168.0" y="266.2" width="3.5" height="29.5" rx="1" fill="#0CA678"/>
+<text x="177.0" y="278.5" font-size="8.5" font-weight="600" fill="#0CA678" text-anchor="start">Software Engineering</text>
+<text x="177.0" y="288.4" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Uses the AI SDLC and platform to build and maintain applications</text>
+<rect x="422.7" y="191.2" width="254.7" height="106.4" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="430.7" y="197.2" width="238.7" height="39.1" rx="3" fill="#E8F2FB" stroke="#99C5ED" stroke-width="0.8"/>
+<rect x="430.7" y="197.2" width="3.5" height="39.1" rx="1" fill="#1C7ED6"/>
+<text x="439.7" y="209.5" font-size="8.5" font-weight="600" fill="#1C7ED6" text-anchor="start">AI</text>
+<text x="439.7" y="219.4" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Engineers who build agents, guardrails, MCP integration and</text>
+<text x="439.7" y="229.0" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">flows</text>
+<rect x="685.3" y="191.2" width="254.7" height="106.4" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="693.3" y="197.2" width="238.7" height="29.5" rx="3" fill="#F1EDFD" stroke="#BFADF5" stroke-width="0.8"/>
+<rect x="693.3" y="197.2" width="3.5" height="29.5" rx="1" fill="#7048E8"/>
+<text x="702.3" y="209.5" font-size="8.5" font-weight="600" fill="#7048E8" text-anchor="start">Adoption</text>
+<text x="702.3" y="219.4" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Drives adoption and enablement across teams</text>
+<rect x="693.3" y="231.7" width="238.7" height="29.5" rx="3" fill="#FDEEE7" stroke="#F5B492" stroke-width="0.8" stroke-dasharray="3 2"/>
+<rect x="693.3" y="231.7" width="3.5" height="29.5" rx="1" fill="#E8590C"/>
+<text x="702.3" y="244.0" font-size="8.5" font-weight="600" fill="#E8590C" text-anchor="start">Security  (assumed)</text>
+<text x="702.3" y="253.9" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Security requirements behind the guardrails</text>
+<rect x="20.0" y="303.6" width="132.0" height="73.2" rx="4" fill="#F8F9FA" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="30.0" y="344.1" font-size="11.5" font-weight="600" fill="#212529" text-anchor="start">Observability</text>
+<rect x="160.0" y="303.6" width="254.7" height="73.2" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="168.0" y="309.6" width="238.7" height="29.5" rx="3" fill="#E8F2FB" stroke="#99C5ED" stroke-width="0.8" stroke-dasharray="3 2"/>
+<rect x="168.0" y="309.6" width="3.5" height="29.5" rx="1" fill="#1C7ED6"/>
+<text x="177.0" y="321.9" font-size="8.5" font-weight="600" fill="#1C7ED6" text-anchor="start">Platform Engineering  (assumed)</text>
+<text x="177.0" y="331.8" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Telemetry pipeline and tooling</text>
+<rect x="168.0" y="344.1" width="238.7" height="29.5" rx="3" fill="#E7F6F2" stroke="#92D7C2" stroke-width="0.8" stroke-dasharray="3 2"/>
+<rect x="168.0" y="344.1" width="3.5" height="29.5" rx="1" fill="#0CA678"/>
+<text x="177.0" y="356.4" font-size="8.5" font-weight="600" fill="#0CA678" text-anchor="start">Software Engineering  (assumed)</text>
+<text x="177.0" y="366.3" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Instruments applications</text>
+<rect x="422.7" y="303.6" width="254.7" height="73.2" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="430.7" y="309.6" width="238.7" height="29.5" rx="3" fill="#E8F2FB" stroke="#99C5ED" stroke-width="0.8" stroke-dasharray="3 2"/>
+<rect x="430.7" y="309.6" width="3.5" height="29.5" rx="1" fill="#1C7ED6"/>
+<text x="439.7" y="321.9" font-size="8.5" font-weight="600" fill="#1C7ED6" text-anchor="start">Data Platform  (assumed)</text>
+<text x="439.7" y="331.8" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Stores and analyses the telemetry</text>
+<rect x="685.3" y="303.6" width="254.7" height="73.2" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="693.3" y="309.6" width="238.7" height="29.5" rx="3" fill="#E7F6F2" stroke="#92D7C2" stroke-width="0.8" stroke-dasharray="3 2"/>
+<rect x="693.3" y="309.6" width="3.5" height="29.5" rx="1" fill="#0CA678"/>
+<text x="702.3" y="321.9" font-size="8.5" font-weight="600" fill="#0CA678" text-anchor="start">Security  (assumed)</text>
+<text x="702.3" y="331.8" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Consumes signals for security monitoring</text>
+<rect x="20.0" y="382.8" width="132.0" height="73.2" rx="4" fill="#F8F9FA" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="30.0" y="423.3" font-size="11.5" font-weight="600" fill="#212529" text-anchor="start">Cloud Landingzone</text>
+<rect x="160.0" y="382.8" width="254.7" height="73.2" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="168.0" y="388.8" width="238.7" height="29.5" rx="3" fill="#E8F2FB" stroke="#99C5ED" stroke-width="0.8"/>
+<rect x="168.0" y="388.8" width="3.5" height="29.5" rx="1" fill="#1C7ED6"/>
+<text x="177.0" y="401.1" font-size="8.5" font-weight="600" fill="#1C7ED6" text-anchor="start">Cloud Engineering</text>
+<text x="177.0" y="411.0" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Builds and maintains the landing zone</text>
+<rect x="168.0" y="423.3" width="238.7" height="29.5" rx="3" fill="#E7F6F2" stroke="#92D7C2" stroke-width="0.8" stroke-dasharray="3 2"/>
+<rect x="168.0" y="423.3" width="3.5" height="29.5" rx="1" fill="#0CA678"/>
+<text x="177.0" y="435.6" font-size="8.5" font-weight="600" fill="#0CA678" text-anchor="start">Platform Engineering  (assumed)</text>
+<text x="177.0" y="445.5" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">The platform runs inside it</text>
+<rect x="422.7" y="382.8" width="254.7" height="73.2" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="430.7" y="388.8" width="238.7" height="29.5" rx="3" fill="#E7F6F2" stroke="#92D7C2" stroke-width="0.8" stroke-dasharray="3 2"/>
+<rect x="430.7" y="388.8" width="3.5" height="29.5" rx="1" fill="#0CA678"/>
+<text x="439.7" y="401.1" font-size="8.5" font-weight="600" fill="#0CA678" text-anchor="start">Data Platform  (assumed)</text>
+<text x="439.7" y="411.0" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Data platform lands in it</text>
+<rect x="685.3" y="382.8" width="254.7" height="73.2" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="693.3" y="388.8" width="238.7" height="29.5" rx="3" fill="#FDEEE7" stroke="#F5B492" stroke-width="0.8" stroke-dasharray="3 2"/>
+<rect x="693.3" y="388.8" width="3.5" height="29.5" rx="1" fill="#E8590C"/>
+<text x="702.3" y="401.1" font-size="8.5" font-weight="600" fill="#E8590C" text-anchor="start">Security  (assumed)</text>
+<text x="702.3" y="411.0" font-size="7.5" font-weight="400" fill="#212529" text-anchor="start">Security baseline, policies and controls</text>
+<text x="20.0" y="465.8" font-size="9" font-weight="600" fill="#868E96" text-anchor="start">How it fits together</text>
+<polygon points="20.0,470.0 235.0,470.0 246.0,495.0 235.0,520.0 20.0,520.0 31.0,495.0" fill="#E2EEF0" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="39.0" y="492.9" font-size="9" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D</text>
+<text x="39.0" y="503.5" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Cloud platform &amp; landing zone</text>
+<polygon points="250.0,470.0 465.0,470.0 476.0,495.0 465.0,520.0 250.0,520.0 261.0,495.0" fill="#ECE8F8" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="269.0" y="492.9" font-size="9" font-weight="600" fill="#5F3DC4" text-anchor="start">DA&amp;E</text>
+<text x="269.0" y="503.5" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Agents, guardrails, MCP, flows</text>
+<polygon points="480.0,470.0 695.0,470.0 706.0,495.0 695.0,520.0 480.0,520.0 491.0,495.0" fill="#E2EEF0" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="499.0" y="492.9" font-size="9" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D</text>
+<text x="499.0" y="503.5" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Software engineering builds &amp; maintains apps</text>
+<polygon points="710.0,470.0 925.0,470.0 936.0,495.0 925.0,520.0 710.0,520.0 721.0,495.0" fill="#F4E4EA" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="729.0" y="492.9" font-size="9" font-weight="600" fill="#A61E4D" text-anchor="start">S&amp;TT</text>
+<text x="729.0" y="503.5" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Adoption, transformation &amp; security</text>
+</svg>
