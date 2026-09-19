@@ -5,7 +5,8 @@
     python render.py --check    # validate the model only
 
 Outputs (all from one layout, so they cannot drift apart)
-    out/portfolio-map.pptx         two slides, native editable shapes
+    out/portfolio-map.pptx         three slides, native editable shapes
+    out/layers.svg|.drawio         division / portfolio / responsibility layers
     out/architecture.svg|.drawio   the building blocks, responsibilities beside them
     out/portfolio-overview.svg|.drawio   the propositions x divisions grid
     out/contribution-matrix.csv    the same facts as a grid, for Excel
@@ -22,6 +23,7 @@ import yaml
 
 import arch_layout
 import drawio_view
+import layers_layout
 import layout
 import svg_view
 
@@ -65,6 +67,10 @@ class Model:
         for slot in ("foundation", "rail"):
             if arch.get(slot, {}).get("proposition") not in self.prop and arch:
                 errs.append(f"architecture.{slot}: unknown proposition")
+        for prop in self.propositions:
+            if prop.get("owner") and prop["owner"] not in self.div:
+                errs.append(f"proposition {prop['id']}: unknown owner "
+                            f"{prop['owner']}")
         for col in arch.get("columns", []):
             if col["proposition"] not in self.prop:
                 errs.append(f"architecture.columns: unknown proposition "
@@ -82,7 +88,13 @@ class Model:
         return errs
 
     def owner_of(self, proposition: str) -> str | None:
-        """The division that builds a proposition — its colour in the drawing."""
+        """The division that owns a proposition — its colour in the drawings.
+
+        Explicit `owner:` wins; otherwise the first division that builds it.
+        """
+        stated = self.prop[proposition].get("owner")
+        if stated:
+            return stated
         for c in self.contributions:
             if c["proposition"] == proposition and c["role"] == "build":
                 return c["division"]
@@ -150,17 +162,20 @@ def main() -> int:
 
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
+    layers = layers_layout.build(m)
     overview, architecture = layout.build(m), arch_layout.build(m)
-    written = [svg_view.write(overview, out / "portfolio-overview.svg"),
-               drawio_view.write(overview, out / "portfolio-overview.drawio"),
+    written = [svg_view.write(layers, out / "layers.svg"),
+               drawio_view.write(layers, out / "layers.drawio"),
                svg_view.write(architecture, out / "architecture.svg"),
-               drawio_view.write(architecture, out / "architecture.drawio")]
+               drawio_view.write(architecture, out / "architecture.drawio"),
+               svg_view.write(overview, out / "portfolio-overview.svg"),
+               drawio_view.write(overview, out / "portfolio-overview.drawio")]
     matrix_csv(m, out / "contribution-matrix.csv")
     (out / "contribution-matrix.md").write_text(matrix_markdown(m), encoding="utf-8")
     written += [out / "contribution-matrix.csv", out / "contribution-matrix.md"]
     if not args.no_pptx:
         import pptx_view
-        written.append(pptx_view.build([architecture, overview],
+        written.append(pptx_view.build([layers, architecture, overview],
                                        out / "portfolio-map.pptx"))
     for w in written:
         print(f"wrote {w}")

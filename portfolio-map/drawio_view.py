@@ -47,6 +47,10 @@ def render(page: layout.Page) -> str:
                      f'strokeColor={sh["stroke"] or "none"};'
                      f'{"dashed=1;" if sh["dash"] else ""}')
             add("", style, sh["x"], sh["y"], sh["w"], sh["h"])
+        elif sh["kind"] == "ellipse":
+            add("", f'ellipse;whiteSpace=wrap;html=1;fillColor={sh["fill"]};'
+                    f'strokeColor={sh["stroke"] or "none"};',
+                sh["x"], sh["y"], sh["w"], sh["h"])
         elif sh["kind"] == "arrow":
             if sh["dir"] == "leftright":
                 style = (f'shape=doubleArrow;whiteSpace=wrap;html=1;arrowWidth=0.45;'

@@ -1,17 +1,39 @@
-# Portfolio map — two pages, one model
+# Portfolio map — three pages, one model
 
-Two pages, both generated from [`model.yaml`](model.yaml) by `python render.py`:
+Three pages, all generated from [`model.yaml`](model.yaml) by `python render.py`:
 
-1. **Architecture** (`architecture.svg`, slide 1) — the building blocks the way an
+1. **Layers** (`layers.svg`, slide 1) — three stacked bands, each with its own
+   colour key: the **division layer** (who we are, with expertise pills),
+   the **portfolio layer** (what we offer, with the parts of each proposition) and
+   the **responsibility layer** (roles as rows × propositions as columns, division
+   badges in the cells). Icons carry the identity of each card.
+2. **Architecture** (`architecture.svg`, slide 2) — the building blocks the way an
    engineer sketches them: software engineering on top using both the platform and
    the AI SDLC, the two containers with their parts, the landing zone underneath,
    observability as a rail beside it and security as a band across the bottom. The
    **responsibilities are written on the side**, one line per contribution.
-2. **Overview grid** (`portfolio-overview.svg`, slide 2) — propositions as rows,
+3. **Overview grid** (`portfolio-overview.svg`, slide 3) — propositions as rows,
    divisions as columns, a coloured chip per contribution, and a supply-chain strip
    along the bottom.
 
-Same facts, two questions: *what sits on what* versus *who is responsible for what*.
+Same facts, three questions: *what the layers are*, *what sits on what*, and
+*who is responsible for what*.
+
+## One colour meaning per band
+
+Three dimensions on one page only works if the reader never has to ask what a
+colour means twice. Each band states its own key in the header:
+
+| Band | Colour means | Shape |
+|---|---|---|
+| Division layer | the division | card per division, expertise as pills |
+| Portfolio layer | the division that **owns** it (`owner:` in the model) | card per proposition, parts listed |
+| Responsibility layer | the **role** | role per row, proposition per column, division badge per contribution |
+
+Icons are drawn from rectangles and ellipses (`icons.py`), never from a symbol
+font or an image — so they arrive in PowerPoint and draw.io as editable shapes and
+cannot break on a machine that lacks a font. Add one by writing a function in
+`icons.py` and naming it in `icon:` on a division or proposition.
 
 ## Why a grid and not a box-and-arrow drawing
 
@@ -62,7 +84,8 @@ python render.py            # regenerate ./out
 
 | Output | Use |
 |---|---|
-| `out/portfolio-map.pptx` | Both pages as slides. Native shapes. |
+| `out/portfolio-map.pptx` | All three pages as slides. Native shapes. |
+| `out/layers.svg` / `.drawio` | The three-layer page. |
 | `out/architecture.svg` / `.drawio` | The building-block picture, responsibilities beside it. |
 | `out/portfolio-overview.svg` / `.drawio` | The propositions × divisions grid. |
 | `out/contribution-matrix.csv` | The same facts for Excel or a PowerPoint table. |

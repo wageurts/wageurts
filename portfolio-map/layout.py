@@ -9,6 +9,7 @@ plain dicts:
     {"kind": "text",  x, y, w, h, lines, align, valign}
     {"kind": "chevron", x, y, w, h, fill, lines}
     {"kind": "arrow",  x, y, w, h, dir, fill, stroke}   dir: down|right|leftright
+    {"kind": "ellipse", x, y, w, h, fill, stroke}
 
 `lines` is a list of {"t": str, "size": pt, "bold": bool, "color": "#rrggbb"}.
 Text is wrapped here rather than by the renderer, so all three outputs break
@@ -72,6 +73,10 @@ class Page:
     def text(self, x, y, w, h, lines, align="l", valign="t"):
         self.shapes.append({"kind": "text", "x": x, "y": y, "w": w, "h": h,
                             "lines": lines, "align": align, "valign": valign})
+
+    def ellipse(self, x, y, w, h, fill, stroke=None):
+        self.shapes.append({"kind": "ellipse", "x": x, "y": y, "w": w, "h": h,
+                            "fill": fill, "stroke": stroke})
 
     def arrow(self, x, y, w, h, direction, fill, stroke=None):
         self.shapes.append({"kind": "arrow", "x": x, "y": y, "w": w, "h": h,

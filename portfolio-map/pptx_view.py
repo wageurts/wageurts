@@ -63,7 +63,9 @@ def _slide(prs, page: layout.Page) -> None:
             _fill_text(slide.shapes.add_textbox(x, y, w, h), sh)
             continue
 
-        if sh["kind"] == "arrow":
+        if sh["kind"] == "ellipse":
+            shape = slide.shapes.add_shape(MSO_SHAPE.OVAL, x, y, w, h)
+        elif sh["kind"] == "arrow":
             shape = slide.shapes.add_shape(ARROW[sh["dir"]], x, y, w, h)
         elif sh["kind"] == "chevron":
             shape = slide.shapes.add_shape(MSO_SHAPE.CHEVRON, x, y, w, h)

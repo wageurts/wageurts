@@ -62,6 +62,13 @@ def render(page: layout.Page) -> str:
             body.append(
                 f'<rect x="{sh["x"]:.1f}" y="{sh["y"]:.1f}" width="{sh["w"]:.1f}" '
                 f'height="{sh["h"]:.1f}" rx="{sh["radius"]}" fill="{sh["fill"]}"{stroke}/>')
+        elif sh["kind"] == "ellipse":
+            stroke = (f' stroke="{sh["stroke"]}" stroke-width="1"'
+                      if sh["stroke"] else "")
+            body.append(
+                f'<ellipse cx="{sh["x"] + sh["w"] / 2:.1f}" '
+                f'cy="{sh["y"] + sh["h"] / 2:.1f}" rx="{sh["w"] / 2:.1f}" '
+                f'ry="{sh["h"] / 2:.1f}" fill="{sh["fill"]}"{stroke}/>')
         elif sh["kind"] == "arrow":
             stroke = f' stroke="{sh["stroke"]}" stroke-width="0.8"' if sh["stroke"] else ""
             body.append(f'<polygon points="{_arrow_points(sh)}" '

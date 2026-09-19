@@ -24,36 +24,56 @@ divisions:
     name: Cloud & Development
     short: C&D
     color: "#0B7285"
+    icon: cloud
     expertise: [Software Engineering, Cloud Engineering, Platform Engineering, Workplace Management]
   - id: DAE
     name: Data, AI & Engagement
     short: DA&E
     color: "#5F3DC4"
+    icon: data
     expertise: [Data Management, Data Platform, AI, Automation]
   - id: STT
     name: Security & Technology Transformation
     short: S&TT
     color: "#A61E4D"
+    icon: shield
     expertise: [Transformation, Adoption, Security]
 
 # Six roles is the practical maximum for a readable page. `code` is the letter
 # used in the CSV companion.
 roles:
-  - {id: build,   code: B, label: Builds & delivers, color: "#1C7ED6"}
-  - {id: use,     code: U, label: Uses,              color: "#0CA678"}
-  - {id: operate, code: O, label: Operates & runs,   color: "#495057"}
-  - {id: govern,  code: G, label: Governs,           color: "#E8590C"}
-  - {id: adopt,   code: A, label: Drives adoption,   color: "#7048E8"}
+  - {id: build,   code: B, label: Builds & delivers, color: "#1C7ED6",
+     definition: "owns it as a product"}
+  - {id: use,     code: U, label: Uses,              color: "#0CA678",
+     definition: "consumes it in delivery"}
+  - {id: operate, code: O, label: Operates & runs,   color: "#495057",
+     definition: "runs it, carries the pager"}
+  - {id: govern,  code: G, label: Governs,           color: "#E8590C",
+     definition: "sets policy and controls"}
+  - {id: adopt,   code: A, label: Drives adoption,   color: "#7048E8",
+     definition: "rollout, enablement, uptake"}
 
 propositions:
   - id: platform-engineering
     name: Platform Engineering
+    owner: CD                  # the division that owns it as a product
+    icon: layers
+    parts: [Containers, Version control, Pipelines & CI/CD, Reporting]
   - id: ai-sdlc
     name: AI SDLC
+    owner: DAE                 # DA&E builds the agents, guardrails, MCP and flows
+    icon: agent
+    parts: [Agents, Flows, Skills, MCP integration, Guardrails]
   - id: observability
     name: Observability
+    owner: CD                  # TODO: confirm — DA&E owns the data side of it
+    icon: eye
+    parts: [Traces, Dashboards, Evaluations, Alerting]     # TODO: confirm
   - id: cloud-landingzone
     name: Cloud Landingzone
+    owner: CD
+    icon: cloud
+    parts: [Accounts & subscriptions, Networking, Identity, Policies]  # TODO: confirm
 
 # proposition + division + expertise + role + what. One line per contribution;
 # this is the only list that grows as the picture gets richer.
@@ -120,12 +140,11 @@ architecture:
   consumer:
     label: Software Engineering
     division: CD
+    icon: grid
     note: "Builds and maintains the applications — uses both the platform and the AI SDLC"
-  columns:
+  columns:            # parts come from the proposition itself
     - proposition: platform-engineering
-      parts: [Containers, Version control, Pipelines & CI/CD, Reporting]
     - proposition: ai-sdlc
-      parts: [Agents, Flows, Skills, MCP integration, Guardrails]
   foundation:
     proposition: cloud-landingzone
     note: "Everything is deployed on it"
@@ -135,6 +154,7 @@ architecture:
   band:
     label: Security
     division: STT
+    icon: shield
     note: "Governs every layer — policies, controls and the requirements behind the guardrails"
   links:
     uses: uses

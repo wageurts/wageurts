@@ -17,6 +17,7 @@ page just answers a different question: not "who is responsible for what" but
 """
 from __future__ import annotations
 
+import icons
 from layout import (BAND, HAIRLINE, INK, MARGIN, MUTED, PAPER, Page, W, H,
                     run, tint, wrap)
 
@@ -27,16 +28,21 @@ COL_GAP = 56.0          # room for the "integrates with" arrow and its label
 
 
 def _block(p: Page, x, y, w, h, color, title, note, *, title_size=11,
-           note_size=7.5, solid=True):
+           note_size=7.5, solid=True, icon=None):
     """A labelled container: strong fill for bands, soft fill for containers."""
     fill = color if solid else tint(color, 0.93)
     p.rect(x, y, w, h, fill=fill, stroke=color if not solid else None, radius=5)
+    tx, tw = x + 10, w - 20
+    if icon:
+        size = 26.0
+        icons.draw(p, icon, x + 10, y + 8, size, color)
+        tx, tw = x + 10 + size + 8, w - 28 - size
     lines = [run(title, title_size, True, PAPER if solid else color)]
     if note:
-        for piece in wrap(note, note_size, w - 20):
+        for piece in wrap(note, note_size, tw):
             lines.append(run(piece, note_size, False,
                              tint(color, 0.80) if solid else INK))
-    p.text(x + 10, y + 7, w - 20, h - 14, lines)
+    p.text(tx, y + 7, tw, h - 14, lines)
     return lines
 
 
@@ -69,7 +75,8 @@ def build(model) -> Page:
 
     consumer = arch["consumer"]
     c_color = divs[consumer["division"]]["color"]
-    _block(p, MARGIN, top, stack_w, 46, c_color, consumer["label"], consumer["note"])
+    _block(p, MARGIN, top, stack_w, 46, c_color, consumer["label"],
+           consumer["note"], icon=consumer.get("icon", "grid"))
 
     # "uses" arrows, one per column
     cols = arch["columns"]
@@ -92,8 +99,8 @@ def build(model) -> Page:
         owner = model.owner_of(prop["id"])
         color = divs[owner]["color"] if owner else INK
         _block(p, cx, col_y, cw, col_h, color, prop["name"], None,
-               title_size=12, solid=False)
-        parts = col["parts"]
+               title_size=12, solid=False, icon=prop.get("icon"))
+        parts = col.get("parts") or prop.get("parts", [])
         ncols = 2 if cw > 240 else 1
         rows = -(-len(parts) // ncols)
         pw = (cw - 20 - (ncols - 1) * 8) / ncols
@@ -126,7 +133,8 @@ def build(model) -> Page:
     p.arrow(MARGIN + stack_w / 2 - 9, f_y - 24, 18, 20, "down", tint(f_color, 0.55))
     p.text(MARGIN + stack_w / 2 + 12, f_y - 21, 70, 14,
            [run(arch["links"]["deploys"], 7.5, False, MUTED)], valign="m")
-    _block(p, MARGIN, f_y, stack_w, 44, f_color, f_prop["name"], found["note"])
+    _block(p, MARGIN, f_y, stack_w, 44, f_color, f_prop["name"], found["note"],
+           icon=f_prop.get("icon"))
 
     # observability rail beside the stack, spanning every layer
     rail = arch["rail"]
@@ -136,10 +144,12 @@ def build(model) -> Page:
     rail_x = MARGIN + stack_w + GAP
     p.rect(rail_x, top, OBS_W, f_y + 44 - top, fill=tint(r_color, 0.92),
            stroke=r_color, radius=5)
+    icons.draw(p, r_prop.get("icon", "eye"), rail_x + (OBS_W - 26) / 2, top + 8, 26,
+               r_color)
     lines = [run(r_prop["name"], 9.5, True, r_color)]
     for piece in wrap(rail["note"], 7, OBS_W - 16):
         lines.append(run(piece, 7, False, INK))
-    p.text(rail_x + 8, top + 8, OBS_W - 16, 120, lines)
+    p.text(rail_x + 8, top + 40, OBS_W - 16, 120, lines)
 
     # security band underneath everything
     band = arch["band"]
@@ -147,7 +157,8 @@ def build(model) -> Page:
     b_y = f_y + 44 + 10
     p.rect(MARGIN, b_y, main_w, 40, fill=tint(b_color, 0.92), stroke=b_color,
            radius=5, dash=True)
-    p.text(MARGIN + 12, b_y + 6, main_w - 24, 28,
+    icons.draw(p, band.get("icon", "shield"), MARGIN + 10, b_y + 7, 26, b_color)
+    p.text(MARGIN + 46, b_y + 6, main_w - 58, 28,
            [run(band["label"], 9.5, True, b_color)]
            + [run(t, 7.5, False, INK) for t in wrap(band["note"], 7.5, main_w - 24)])
 

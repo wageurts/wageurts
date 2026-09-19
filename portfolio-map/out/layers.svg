@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Segoe UI, Calibri, Helvetica, Arial, sans-serif">
+<rect width="960.0" height="540.0" fill="#FFFFFF"/>
+<rect x="848.0" y="22.0" width="9.0" height="9.0" rx="2" fill="#7048E8"/>
+<text x="861.0" y="29.2" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Drives adoption</text>
+<rect x="791.2" y="22.0" width="9.0" height="9.0" rx="2" fill="#E8590C"/>
+<text x="804.2" y="29.2" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Governs</text>
+<rect x="747.6" y="22.0" width="9.0" height="9.0" rx="2" fill="#0CA678"/>
+<text x="760.6" y="29.2" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Uses</text>
+<rect x="646.8" y="22.0" width="9.0" height="9.0" rx="2" fill="#1C7ED6"/>
+<text x="659.8" y="29.2" font-size="8" font-weight="400" fill="#212529" text-anchor="start">Builds &amp; delivers</text>
+<text x="20.0" y="31.6" font-size="18" font-weight="600" fill="#212529" text-anchor="start">Divisions, portfolio and responsibilities</text>
+<text x="20.0" y="47.3" font-size="9.5" font-weight="400" fill="#868E96" text-anchor="start">Three layers, one colour meaning per layer</text>
+<text x="20.0" y="70.3" font-size="8.5" font-weight="600" fill="#868E96" text-anchor="start">1  ·  DIVISION LAYER</text>
+<text x="240.0" y="69.8" font-size="8" font-weight="400" fill="#ADB5BD" text-anchor="start">who we are · colour = division</text>
+<rect x="20.0" y="76.0" width="300.0" height="94.0" rx="6" fill="#F0F7F8" stroke="#0B7285" stroke-width="0.8"/>
+<rect x="20.0" y="76.0" width="300.0" height="4.0" rx="2" fill="#0B7285"/>
+<ellipse cx="49.0" cy="109.0" rx="17.0" ry="17.0" fill="#DDEBEE"/>
+<ellipse cx="43.8" cy="111.6" rx="4.4" ry="4.4" fill="#0B7285"/>
+<ellipse cx="49.4" cy="109.4" rx="5.2" ry="5.2" fill="#0B7285"/>
+<ellipse cx="54.4" cy="111.8" rx="4.1" ry="4.1" fill="#0B7285"/>
+<rect x="40.7" y="111.6" width="16.5" height="4.4" rx="2.1759999999999997" fill="#0B7285"/>
+<text x="76.0" y="100.8" font-size="11" font-weight="600" fill="#0B7285" text-anchor="start">Cloud &amp; Development</text>
+<text x="76.0" y="113.8" font-size="8" font-weight="400" fill="#868E96" text-anchor="start">C&amp;D</text>
+<rect x="32.0" y="128.0" width="86.8" height="15.0" rx="7.5" fill="#DDEBEE"/>
+<text x="39.0" y="137.9" font-size="7.0" font-weight="400" fill="#0B7285" text-anchor="start">Software Engineering</text>
+<rect x="123.8" y="128.0" width="75.9" height="15.0" rx="7.5" fill="#DDEBEE"/>
+<text x="130.8" y="137.9" font-size="7.0" font-weight="400" fill="#0B7285" text-anchor="start">Cloud Engineering</text>
+<rect x="204.7" y="128.0" width="86.8" height="15.0" rx="7.5" fill="#DDEBEE"/>
+<text x="211.7" y="137.9" font-size="7.0" font-weight="400" fill="#0B7285" text-anchor="start">Platform Engineering</text>
+<rect x="32.0" y="145.0" width="86.8" height="15.0" rx="7.5" fill="#DDEBEE"/>
+<text x="39.0" y="154.9" font-size="7.0" font-weight="400" fill="#0B7285" text-anchor="start">Workplace Management</text>
+<rect x="330.0" y="76.0" width="300.0" height="94.0" rx="6" fill="#F5F3FB" stroke="#5F3DC4" stroke-width="0.8"/>
+<rect x="330.0" y="76.0" width="300.0" height="4.0" rx="2" fill="#5F3DC4"/>
+<ellipse cx="359.0" cy="109.0" rx="17.0" ry="17.0" fill="#E9E4F7"/>
+<rect x="351.2" y="102.0" width="15.7" height="4.4" rx="1.9583999999999997" fill="#5F3DC4"/>
+<ellipse cx="359.0" cy="102.3" rx="7.8" ry="1.7" fill="#5F3DC4"/>
+<rect x="351.2" y="107.3" width="15.7" height="4.4" rx="1.9583999999999997" fill="#5F3DC4"/>
+<ellipse cx="359.0" cy="107.5" rx="7.8" ry="1.7" fill="#5F3DC4"/>
+<rect x="351.2" y="112.5" width="15.7" height="4.4" rx="1.9583999999999997" fill="#5F3DC4"/>
+<ellipse cx="359.0" cy="112.7" rx="7.8" ry="1.7" fill="#5F3DC4"/>
+<text x="386.0" y="100.8" font-size="11" font-weight="600" fill="#5F3DC4" text-anchor="start">Data, AI &amp; Engagement</text>
+<text x="386.0" y="113.8" font-size="8" font-weight="400" fill="#868E96" text-anchor="start">DA&amp;E</text>
+<rect x="342.0" y="128.0" width="68.6" height="15.0" rx="7.5" fill="#E9E4F7"/>
+<text x="349.0" y="137.9" font-size="7.0" font-weight="400" fill="#5F3DC4" text-anchor="start">Data Management</text>
+<rect x="415.6" y="128.0" width="61.3" height="15.0" rx="7.5" fill="#E9E4F7"/>
+<text x="422.6" y="137.9" font-size="7.0" font-weight="400" fill="#5F3DC4" text-anchor="start">Data Platform</text>
+<rect x="481.9" y="128.0" width="21.3" height="15.0" rx="7.5" fill="#E9E4F7"/>
+<text x="488.9" y="137.9" font-size="7.0" font-weight="400" fill="#5F3DC4" text-anchor="start">AI</text>
+<rect x="508.2" y="128.0" width="50.4" height="15.0" rx="7.5" fill="#E9E4F7"/>
+<text x="515.2" y="137.9" font-size="7.0" font-weight="400" fill="#5F3DC4" text-anchor="start">Automation</text>
+<rect x="640.0" y="76.0" width="300.0" height="94.0" rx="6" fill="#FAF2F4" stroke="#A61E4D" stroke-width="0.8"/>
+<rect x="640.0" y="76.0" width="300.0" height="4.0" rx="2" fill="#A61E4D"/>
+<ellipse cx="669.0" cy="109.0" rx="17.0" ry="17.0" fill="#F3E0E6"/>
+<rect x="662.0" y="101.2" width="13.9" height="10.0" rx="1.3055999999999999" fill="#A61E4D"/>
+<ellipse cx="669.0" cy="111.0" rx="7.0" ry="6.3" fill="#A61E4D"/>
+<ellipse cx="669.0" cy="107.9" rx="1.5" ry="1.5" fill="#FFFFFF"/>
+<rect x="668.3" y="108.1" width="1.3" height="3.5" rx="0.0" fill="#FFFFFF"/>
+<text x="696.0" y="100.8" font-size="11" font-weight="600" fill="#A61E4D" text-anchor="start">Security &amp; Technology Transformation</text>
+<text x="696.0" y="113.8" font-size="8" font-weight="400" fill="#868E96" text-anchor="start">S&amp;TT</text>
+<rect x="652.0" y="128.0" width="65.0" height="15.0" rx="7.5" fill="#F3E0E6"/>
+<text x="659.0" y="137.9" font-size="7.0" font-weight="400" fill="#A61E4D" text-anchor="start">Transformation</text>
+<rect x="722.0" y="128.0" width="43.1" height="15.0" rx="7.5" fill="#F3E0E6"/>
+<text x="729.0" y="137.9" font-size="7.0" font-weight="400" fill="#A61E4D" text-anchor="start">Adoption</text>
+<rect x="770.1" y="128.0" width="43.1" height="15.0" rx="7.5" fill="#F3E0E6"/>
+<text x="777.1" y="137.9" font-size="7.0" font-weight="400" fill="#A61E4D" text-anchor="start">Security</text>
+<text x="20.0" y="190.3" font-size="8.5" font-weight="600" fill="#868E96" text-anchor="start">2  ·  PORTFOLIO LAYER</text>
+<text x="240.0" y="189.8" font-size="8" font-weight="400" fill="#ADB5BD" text-anchor="start">what we offer · colour = who owns it</text>
+<rect x="20.0" y="196.0" width="222.5" height="131.0" rx="6" fill="#FFFFFF" stroke="#0B7285" stroke-width="0.8"/>
+<rect x="20.0" y="196.0" width="222.5" height="4.0" rx="2" fill="#0B7285"/>
+<ellipse cx="45.0" cy="225.0" rx="15.0" ry="15.0" fill="#DDEBEE"/>
+<rect x="37.3" y="219.2" width="15.4" height="2.7" rx="0.9600000000000002" fill="#0B7285"/>
+<rect x="38.5" y="223.5" width="13.1" height="2.7" rx="0.9600000000000002" fill="#60A3B0"/>
+<rect x="39.6" y="227.7" width="10.8" height="2.7" rx="0.9600000000000002" fill="#B6D5DA"/>
+<text x="68.0" y="219.3" font-size="10.5" font-weight="600" fill="#0B7285" text-anchor="start">Platform Engineering</text>
+<text x="68.0" y="230.9" font-size="7" font-weight="400" fill="#868E96" text-anchor="start">built by C&amp;D</text>
+<rect x="30.0" y="246.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="36.0" y="254.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Containers</text>
+<rect x="30.0" y="261.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="36.0" y="269.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Version control</text>
+<rect x="30.0" y="276.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="36.0" y="284.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Pipelines &amp; CI/CD</text>
+<rect x="30.0" y="291.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="36.0" y="299.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Reporting</text>
+<rect x="252.5" y="196.0" width="222.5" height="131.0" rx="6" fill="#FFFFFF" stroke="#5F3DC4" stroke-width="0.8"/>
+<rect x="252.5" y="196.0" width="222.5" height="4.0" rx="2" fill="#5F3DC4"/>
+<ellipse cx="277.5" cy="225.0" rx="15.0" ry="15.0" fill="#E9E4F7"/>
+<ellipse cx="277.5" cy="218.1" rx="1.2" ry="1.2" fill="#5F3DC4"/>
+<rect x="277.3" y="218.5" width="0.4" height="1.9" rx="0.0" fill="#5F3DC4"/>
+<rect x="271.0" y="220.4" width="13.1" height="10.0" rx="2.6880000000000006" fill="#5F3DC4"/>
+<ellipse cx="274.9" cy="224.7" rx="1.2" ry="1.2" fill="#FFFFFF"/>
+<ellipse cx="280.1" cy="224.7" rx="1.2" ry="1.2" fill="#FFFFFF"/>
+<rect x="274.4" y="227.3" width="6.1" height="1.2" rx="0.5760000000000001" fill="#FFFFFF"/>
+<text x="300.5" y="219.3" font-size="10.5" font-weight="600" fill="#5F3DC4" text-anchor="start">AI SDLC</text>
+<text x="300.5" y="230.9" font-size="7" font-weight="400" fill="#868E96" text-anchor="start">built by DA&amp;E</text>
+<rect x="262.5" y="246.0" width="202.5" height="13.0" rx="3" fill="#F4F1FB"/>
+<text x="268.5" y="254.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Agents</text>
+<rect x="262.5" y="261.0" width="202.5" height="13.0" rx="3" fill="#F4F1FB"/>
+<text x="268.5" y="269.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Flows</text>
+<rect x="262.5" y="276.0" width="202.5" height="13.0" rx="3" fill="#F4F1FB"/>
+<text x="268.5" y="284.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Skills</text>
+<rect x="262.5" y="291.0" width="202.5" height="13.0" rx="3" fill="#F4F1FB"/>
+<text x="268.5" y="299.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">MCP integration</text>
+<rect x="262.5" y="306.0" width="202.5" height="13.0" rx="3" fill="#F4F1FB"/>
+<text x="268.5" y="314.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Guardrails</text>
+<rect x="485.0" y="196.0" width="222.5" height="131.0" rx="6" fill="#FFFFFF" stroke="#0B7285" stroke-width="0.8"/>
+<rect x="485.0" y="196.0" width="222.5" height="4.0" rx="2" fill="#0B7285"/>
+<ellipse cx="510.0" cy="225.0" rx="15.0" ry="15.0" fill="#DDEBEE"/>
+<ellipse cx="510.0" cy="225.0" rx="8.4" ry="4.6" fill="#0B7285"/>
+<ellipse cx="510.0" cy="225.0" rx="3.8" ry="3.5" fill="#FFFFFF"/>
+<ellipse cx="510.0" cy="225.0" rx="2.3" ry="2.3" fill="#0B7285"/>
+<text x="533.0" y="219.3" font-size="10.5" font-weight="600" fill="#0B7285" text-anchor="start">Observability</text>
+<text x="533.0" y="230.9" font-size="7" font-weight="400" fill="#868E96" text-anchor="start">built by C&amp;D</text>
+<rect x="495.0" y="246.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="501.0" y="254.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Traces</text>
+<rect x="495.0" y="261.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="501.0" y="269.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Dashboards</text>
+<rect x="495.0" y="276.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="501.0" y="284.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Evaluations</text>
+<rect x="495.0" y="291.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="501.0" y="299.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Alerting</text>
+<rect x="717.5" y="196.0" width="222.5" height="131.0" rx="6" fill="#FFFFFF" stroke="#0B7285" stroke-width="0.8"/>
+<rect x="717.5" y="196.0" width="222.5" height="4.0" rx="2" fill="#0B7285"/>
+<ellipse cx="742.5" cy="225.0" rx="15.0" ry="15.0" fill="#DDEBEE"/>
+<ellipse cx="737.9" cy="227.3" rx="3.8" ry="3.8" fill="#0B7285"/>
+<ellipse cx="742.9" cy="225.4" rx="4.6" ry="4.6" fill="#0B7285"/>
+<ellipse cx="747.3" cy="227.5" rx="3.6" ry="3.6" fill="#0B7285"/>
+<rect x="735.2" y="227.3" width="14.6" height="3.8" rx="1.9200000000000004" fill="#0B7285"/>
+<text x="765.5" y="219.3" font-size="10.5" font-weight="600" fill="#0B7285" text-anchor="start">Cloud Landingzone</text>
+<text x="765.5" y="230.9" font-size="7" font-weight="400" fill="#868E96" text-anchor="start">built by C&amp;D</text>
+<rect x="727.5" y="246.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="733.5" y="254.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Accounts &amp; subscriptions</text>
+<rect x="727.5" y="261.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="733.5" y="269.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Networking</text>
+<rect x="727.5" y="276.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="733.5" y="284.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Identity</text>
+<rect x="727.5" y="291.0" width="202.5" height="13.0" rx="3" fill="#EEF5F6"/>
+<text x="733.5" y="299.9" font-size="7" font-weight="400" fill="#212529" text-anchor="start">Policies</text>
+<text x="20.0" y="347.3" font-size="8.5" font-weight="600" fill="#868E96" text-anchor="start">3  ·  RESPONSIBILITY LAYER</text>
+<text x="240.0" y="346.8" font-size="8" font-weight="400" fill="#ADB5BD" text-anchor="start">who does what · colour = role</text>
+<rect x="20.0" y="353.0" width="920.0" height="167.0" rx="6" fill="#F8F9FA" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="146.0" y="359.0" width="190.5" height="18.0" rx="3" fill="#0B7285"/>
+<text x="154.0" y="370.9" font-size="8.5" font-weight="600" fill="#FFFFFF" text-anchor="start">Platform Engineering</text>
+<rect x="344.5" y="359.0" width="190.5" height="18.0" rx="3" fill="#5F3DC4"/>
+<text x="352.5" y="370.9" font-size="8.5" font-weight="600" fill="#FFFFFF" text-anchor="start">AI SDLC</text>
+<rect x="543.0" y="359.0" width="190.5" height="18.0" rx="3" fill="#0B7285"/>
+<text x="551.0" y="370.9" font-size="8.5" font-weight="600" fill="#FFFFFF" text-anchor="start">Observability</text>
+<rect x="741.5" y="359.0" width="190.5" height="18.0" rx="3" fill="#0B7285"/>
+<text x="749.5" y="370.9" font-size="8.5" font-weight="600" fill="#FFFFFF" text-anchor="start">Cloud Landingzone</text>
+<rect x="28.0" y="383.0" width="110.0" height="28.5" rx="4" fill="#E8F2FB"/>
+<rect x="28.0" y="383.0" width="4.0" height="28.5" rx="2" fill="#1C7ED6"/>
+<text x="40.0" y="396.0" font-size="8.5" font-weight="600" fill="#1C7ED6" text-anchor="start">Builds &amp; delivers</text>
+<text x="40.0" y="404.9" font-size="6.5" font-weight="400" fill="#868E96" text-anchor="start">owns it as a product</text>
+<rect x="146.0" y="383.0" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="152.0" y="385.5" width="178.5" height="10.2" rx="3" fill="#E7F1F3"/>
+<rect x="152.0" y="385.5" width="3.0" height="10.2" rx="1" fill="#0B7285"/>
+<text x="160.0" y="393.0" font-size="7" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D · Platform Engineering</text>
+<rect x="152.0" y="398.8" width="178.5" height="10.2" rx="3" fill="#EFECF9"/>
+<rect x="152.0" y="398.8" width="3.0" height="10.2" rx="1" fill="#5F3DC4"/>
+<text x="160.0" y="406.3" font-size="7" font-weight="600" fill="#5F3DC4" text-anchor="start">DA&amp;E · Automation</text>
+<rect x="344.5" y="383.0" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="350.5" y="384.0" width="178.5" height="6.8" rx="3" fill="#E7F1F3"/>
+<rect x="350.5" y="384.0" width="3.0" height="6.8" rx="1" fill="#0B7285"/>
+<text x="358.5" y="389.8" font-size="7" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D · Cloud Engineering</text>
+<rect x="350.5" y="393.8" width="178.5" height="6.8" rx="3" fill="#E7F1F3"/>
+<rect x="350.5" y="393.8" width="3.0" height="6.8" rx="1" fill="#0B7285"/>
+<text x="358.5" y="399.6" font-size="7" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D · Platform Engineering</text>
+<rect x="350.5" y="403.7" width="178.5" height="6.8" rx="3" fill="#EFECF9"/>
+<rect x="350.5" y="403.7" width="3.0" height="6.8" rx="1" fill="#5F3DC4"/>
+<text x="358.5" y="409.5" font-size="7" font-weight="600" fill="#5F3DC4" text-anchor="start">DA&amp;E · AI</text>
+<rect x="543.0" y="383.0" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="549.0" y="385.5" width="178.5" height="10.2" rx="3" fill="#E7F1F3"/>
+<rect x="549.0" y="385.5" width="3.0" height="10.2" rx="1" fill="#0B7285"/>
+<text x="557.0" y="393.0" font-size="7" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D · Platform Engineering</text>
+<rect x="549.0" y="398.8" width="178.5" height="10.2" rx="3" fill="#EFECF9"/>
+<rect x="549.0" y="398.8" width="3.0" height="10.2" rx="1" fill="#5F3DC4"/>
+<text x="557.0" y="406.3" font-size="7" font-weight="600" fill="#5F3DC4" text-anchor="start">DA&amp;E · Data Platform</text>
+<rect x="741.5" y="383.0" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="747.5" y="388.8" width="178.5" height="17.0" rx="3" fill="#E7F1F3"/>
+<rect x="747.5" y="388.8" width="3.0" height="17.0" rx="1" fill="#0B7285"/>
+<text x="755.5" y="399.6" font-size="7" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D · Cloud Engineering</text>
+<rect x="28.0" y="416.5" width="110.0" height="28.5" rx="4" fill="#E7F6F2"/>
+<rect x="28.0" y="416.5" width="4.0" height="28.5" rx="2" fill="#0CA678"/>
+<text x="40.0" y="429.5" font-size="8.5" font-weight="600" fill="#0CA678" text-anchor="start">Uses</text>
+<text x="40.0" y="438.4" font-size="6.5" font-weight="400" fill="#868E96" text-anchor="start">consumes it in delivery</text>
+<rect x="146.0" y="416.5" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="152.0" y="422.2" width="178.5" height="17.0" rx="3" fill="#E7F1F3"/>
+<rect x="152.0" y="422.2" width="3.0" height="17.0" rx="1" fill="#0B7285"/>
+<text x="160.0" y="433.1" font-size="7" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D · Software Engineering</text>
+<rect x="344.5" y="416.5" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="350.5" y="422.2" width="178.5" height="17.0" rx="3" fill="#E7F1F3"/>
+<rect x="350.5" y="422.2" width="3.0" height="17.0" rx="1" fill="#0B7285"/>
+<text x="358.5" y="433.1" font-size="7" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D · Software Engineering</text>
+<rect x="543.0" y="416.5" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="549.0" y="419.0" width="178.5" height="10.2" rx="3" fill="#E7F1F3"/>
+<rect x="549.0" y="419.0" width="3.0" height="10.2" rx="1" fill="#0B7285"/>
+<text x="557.0" y="426.5" font-size="7" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D · Software Engineering</text>
+<rect x="549.0" y="432.2" width="178.5" height="10.2" rx="3" fill="#F6E8ED"/>
+<rect x="549.0" y="432.2" width="3.0" height="10.2" rx="1" fill="#A61E4D"/>
+<text x="557.0" y="439.8" font-size="7" font-weight="600" fill="#A61E4D" text-anchor="start">S&amp;TT · Security</text>
+<rect x="741.5" y="416.5" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="747.5" y="419.0" width="178.5" height="10.2" rx="3" fill="#E7F1F3"/>
+<rect x="747.5" y="419.0" width="3.0" height="10.2" rx="1" fill="#0B7285"/>
+<text x="755.5" y="426.5" font-size="7" font-weight="600" fill="#0B7285" text-anchor="start">C&amp;D · Platform Engineering</text>
+<rect x="747.5" y="432.2" width="178.5" height="10.2" rx="3" fill="#EFECF9"/>
+<rect x="747.5" y="432.2" width="3.0" height="10.2" rx="1" fill="#5F3DC4"/>
+<text x="755.5" y="439.8" font-size="7" font-weight="600" fill="#5F3DC4" text-anchor="start">DA&amp;E · Data Platform</text>
+<rect x="28.0" y="450.0" width="110.0" height="28.5" rx="4" fill="#FDEEE7"/>
+<rect x="28.0" y="450.0" width="4.0" height="28.5" rx="2" fill="#E8590C"/>
+<text x="40.0" y="463.0" font-size="8.5" font-weight="600" fill="#E8590C" text-anchor="start">Governs</text>
+<text x="40.0" y="471.9" font-size="6.5" font-weight="400" fill="#868E96" text-anchor="start">sets policy and controls</text>
+<rect x="146.0" y="450.0" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="241.2" y="467.3" font-size="9" font-weight="400" fill="#CED4DA" text-anchor="middle">–</text>
+<rect x="344.5" y="450.0" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="350.5" y="455.8" width="178.5" height="17.0" rx="3" fill="#F6E8ED"/>
+<rect x="350.5" y="455.8" width="3.0" height="17.0" rx="1" fill="#A61E4D"/>
+<text x="358.5" y="466.6" font-size="7" font-weight="600" fill="#A61E4D" text-anchor="start">S&amp;TT · Security</text>
+<rect x="543.0" y="450.0" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="638.2" y="467.3" font-size="9" font-weight="400" fill="#CED4DA" text-anchor="middle">–</text>
+<rect x="741.5" y="450.0" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="747.5" y="455.8" width="178.5" height="17.0" rx="3" fill="#F6E8ED"/>
+<rect x="747.5" y="455.8" width="3.0" height="17.0" rx="1" fill="#A61E4D"/>
+<text x="755.5" y="466.6" font-size="7" font-weight="600" fill="#A61E4D" text-anchor="start">S&amp;TT · Security</text>
+<rect x="28.0" y="483.5" width="110.0" height="28.5" rx="4" fill="#F1EDFD"/>
+<rect x="28.0" y="483.5" width="4.0" height="28.5" rx="2" fill="#7048E8"/>
+<text x="40.0" y="496.5" font-size="8.5" font-weight="600" fill="#7048E8" text-anchor="start">Drives adoption</text>
+<text x="40.0" y="505.4" font-size="6.5" font-weight="400" fill="#868E96" text-anchor="start">rollout, enablement, uptake</text>
+<rect x="146.0" y="483.5" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="152.0" y="489.2" width="178.5" height="17.0" rx="3" fill="#F6E8ED"/>
+<rect x="152.0" y="489.2" width="3.0" height="17.0" rx="1" fill="#A61E4D"/>
+<text x="160.0" y="500.1" font-size="7" font-weight="600" fill="#A61E4D" text-anchor="start">S&amp;TT · Adoption</text>
+<rect x="344.5" y="483.5" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<rect x="350.5" y="489.2" width="178.5" height="17.0" rx="3" fill="#F6E8ED"/>
+<rect x="350.5" y="489.2" width="3.0" height="17.0" rx="1" fill="#A61E4D"/>
+<text x="358.5" y="500.1" font-size="7" font-weight="600" fill="#A61E4D" text-anchor="start">S&amp;TT · Adoption</text>
+<rect x="543.0" y="483.5" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="638.2" y="500.8" font-size="9" font-weight="400" fill="#CED4DA" text-anchor="middle">–</text>
+<rect x="741.5" y="483.5" width="190.5" height="28.5" rx="4" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="0.8"/>
+<text x="836.8" y="500.8" font-size="9" font-weight="400" fill="#CED4DA" text-anchor="middle">–</text>
+</svg>
