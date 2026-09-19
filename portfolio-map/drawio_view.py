@@ -35,6 +35,18 @@ def render(page: layout.Page) -> str:
                      f'strokeColor={sh["stroke"] or "none"};'
                      f'{"dashed=1;" if sh["dash"] else ""}')
             add("", style, sh["x"], sh["y"], sh["w"], sh["h"])
+        elif sh["kind"] == "arrow":
+            if sh["dir"] == "leftright":
+                style = (f'shape=doubleArrow;whiteSpace=wrap;html=1;arrowWidth=0.45;'
+                         f'arrowSize=0.25;fillColor={sh["fill"]};'
+                         f'strokeColor={sh["stroke"] or "none"};')
+            else:
+                direction = "south" if sh["dir"] == "down" else "east"
+                style = (f'shape=singleArrow;whiteSpace=wrap;html=1;arrowWidth=0.45;'
+                         f'arrowSize=0.4;direction={direction};'
+                         f'fillColor={sh["fill"]};'
+                         f'strokeColor={sh["stroke"] or "none"};')
+            add("", style, sh["x"], sh["y"], sh["w"], sh["h"])
         elif sh["kind"] == "chevron":
             style = (f'shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;'
                      f'fixedSize=1;size={layout.NOTCH:.0f};fillColor={sh["fill"]};'

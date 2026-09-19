@@ -40,18 +40,32 @@ def _fill_text(shape, sh: dict) -> None:
         run.font.color.rgb = rgb(ln["color"])
 
 
-def build(page: layout.Page, path: pathlib.Path) -> pathlib.Path:
+ARROW = {"down": MSO_SHAPE.DOWN_ARROW, "right": MSO_SHAPE.RIGHT_ARROW,
+         "leftright": MSO_SHAPE.LEFT_RIGHT_ARROW}
+
+
+def build(pages, path: pathlib.Path) -> pathlib.Path:
+    if isinstance(pages, layout.Page):
+        pages = [pages]
     prs = Presentation()
     prs.slide_width, prs.slide_height = Pt(layout.W), Pt(layout.H)
-    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    for page in pages:
+        _slide(prs, page)
+    prs.save(str(path))
+    return path
 
+
+def _slide(prs, page: layout.Page) -> None:
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
     for sh in page.shapes:
         x, y, w, h = (Pt(sh[k]) for k in ("x", "y", "w", "h"))
         if sh["kind"] == "text":
             _fill_text(slide.shapes.add_textbox(x, y, w, h), sh)
             continue
 
-        if sh["kind"] == "chevron":
+        if sh["kind"] == "arrow":
+            shape = slide.shapes.add_shape(ARROW[sh["dir"]], x, y, w, h)
+        elif sh["kind"] == "chevron":
             shape = slide.shapes.add_shape(MSO_SHAPE.CHEVRON, x, y, w, h)
             shape.adjustments[0] = layout.NOTCH / min(sh["w"], sh["h"])
         elif sh["radius"]:
@@ -63,7 +77,7 @@ def build(page: layout.Page, path: pathlib.Path) -> pathlib.Path:
         shape.fill.solid()
         shape.fill.fore_color.rgb = rgb(sh["fill"])
         shape.shadow.inherit = False
-        stroke = sh.get("stroke") if sh["kind"] == "rect" else "#DEE2E6"
+        stroke = sh.get("stroke") if sh["kind"] != "chevron" else "#DEE2E6"
         if stroke:
             shape.line.color.rgb = rgb(stroke)
             shape.line.width = Pt(0.75)
@@ -78,6 +92,3 @@ def build(page: layout.Page, path: pathlib.Path) -> pathlib.Path:
             shape.text_frame.margin_left = Pt(inset)
         else:
             shape.text_frame.text = ""
-
-    prs.save(str(path))
-    return path

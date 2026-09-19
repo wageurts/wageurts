@@ -34,6 +34,24 @@ def _chevron_points(sh: dict) -> str:
         (x, y + h), (x + NOTCH, y + h / 2)])
 
 
+def _arrow_points(sh: dict) -> str:
+    x, y, w, h = sh["x"], sh["y"], sh["w"], sh["h"]
+    if sh["dir"] == "down":
+        pts = [(x + w * .28, y), (x + w * .72, y), (x + w * .72, y + h * .55),
+               (x + w, y + h * .55), (x + w / 2, y + h), (x, y + h * .55),
+               (x + w * .28, y + h * .55)]
+    elif sh["dir"] == "right":
+        pts = [(x, y + h * .28), (x + w * .6, y + h * .28), (x + w * .6, y),
+               (x + w, y + h / 2), (x + w * .6, y + h), (x + w * .6, y + h * .72),
+               (x, y + h * .72)]
+    else:  # leftright
+        pts = [(x, y + h / 2), (x + w * .25, y), (x + w * .25, y + h * .28),
+               (x + w * .75, y + h * .28), (x + w * .75, y), (x + w, y + h / 2),
+               (x + w * .75, y + h), (x + w * .75, y + h * .72),
+               (x + w * .25, y + h * .72), (x + w * .25, y + h)]
+    return " ".join(f"{px:.1f},{py:.1f}" for px, py in pts)
+
+
 def render(page: layout.Page) -> str:
     body = [f'<rect width="{layout.W}" height="{layout.H}" fill="#FFFFFF"/>']
     for sh in page.shapes:
@@ -44,6 +62,10 @@ def render(page: layout.Page) -> str:
             body.append(
                 f'<rect x="{sh["x"]:.1f}" y="{sh["y"]:.1f}" width="{sh["w"]:.1f}" '
                 f'height="{sh["h"]:.1f}" rx="{sh["radius"]}" fill="{sh["fill"]}"{stroke}/>')
+        elif sh["kind"] == "arrow":
+            stroke = f' stroke="{sh["stroke"]}" stroke-width="0.8"' if sh["stroke"] else ""
+            body.append(f'<polygon points="{_arrow_points(sh)}" '
+                        f'fill="{sh["fill"]}"{stroke}/>')
         elif sh["kind"] == "chevron":
             body.append(f'<polygon points="{_chevron_points(sh)}" fill="{sh["fill"]}" '
                         f'stroke="#DEE2E6" stroke-width="0.8"/>')

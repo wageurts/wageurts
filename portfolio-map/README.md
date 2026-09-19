@@ -1,11 +1,17 @@
-# Portfolio overview — one page, one model
+# Portfolio map — two pages, one model
 
-One diagram that carries all three dimensions at once: **propositions** (rows),
-**divisions** (columns) and **responsibilities** (the coloured chips in the cells,
-each naming the expertise that does the work). A supply-chain strip along the
-bottom answers the fourth question — how the divisions need each other.
+Two pages, both generated from [`model.yaml`](model.yaml) by `python render.py`:
 
-Everything is generated from [`model.yaml`](model.yaml) by `python render.py`.
+1. **Architecture** (`architecture.svg`, slide 1) — the building blocks the way an
+   engineer sketches them: software engineering on top using both the platform and
+   the AI SDLC, the two containers with their parts, the landing zone underneath,
+   observability as a rail beside it and security as a band across the bottom. The
+   **responsibilities are written on the side**, one line per contribution.
+2. **Overview grid** (`portfolio-overview.svg`, slide 2) — propositions as rows,
+   divisions as columns, a coloured chip per contribution, and a supply-chain strip
+   along the bottom.
+
+Same facts, two questions: *what sits on what* versus *who is responsible for what*.
 
 ## Why a grid and not a box-and-arrow drawing
 
@@ -56,9 +62,9 @@ python render.py            # regenerate ./out
 
 | Output | Use |
 |---|---|
-| `out/portfolio-overview.pptx` | The slide. One page, native shapes. |
-| `out/portfolio-overview.drawio` | Open in draw.io / diagrams.net to edit by hand or export SVG/VSDX. |
-| `out/portfolio-overview.svg` | Preview in a browser, a wiki or the repo. |
+| `out/portfolio-map.pptx` | Both pages as slides. Native shapes. |
+| `out/architecture.svg` / `.drawio` | The building-block picture, responsibilities beside it. |
+| `out/portfolio-overview.svg` / `.drawio` | The propositions × divisions grid. |
 | `out/contribution-matrix.csv` | The same facts for Excel or a PowerPoint table. |
 | `out/contribution-matrix.md` | The same facts, readable in the repo. |
 
@@ -76,6 +82,19 @@ validator catches it, but quoting avoids the round trip.
 
 Roles: `build` (B), `use` (U), `operate` (O), `govern` (G), `adopt` (A). The
 legend only shows the roles actually used on the page.
+
+## The architecture page
+
+Its shape lives under `architecture:` in the model — which propositions are the
+two containers and what parts they hold, which one is the foundation, which one is
+the rail, and the link labels (`uses`, `integrates with`, `deploys on`). The
+responsibilities panel is generated from the same `contributions:` list as the
+grid, so the two pages can never disagree, and it automatically drops to a smaller
+type size (and finally to headings only) if you add more than fits.
+
+Guardrails sit inside the AI SDLC rather than inside Platform Engineering, because
+DA&E builds them along with the agents, flows and MCP integration. Move the string
+between the two `parts:` lists if you would rather show them on the platform side.
 
 ## Open question
 

@@ -109,3 +109,34 @@ chain:
   - {division: DAE, label: "Agents, guardrails, MCP, flows"}
   - {division: CD,  label: "Software engineering builds & maintains apps"}
   - {division: STT, label: "Adoption, transformation & security"}
+
+# ---------------------------------------------------------------------------
+# The architecture view: the same propositions drawn as nested building blocks
+# the way an engineer sketches them, with the responsibilities listed beside it.
+# ---------------------------------------------------------------------------
+architecture:
+  title: How it fits together
+  subtitle: "Software engineering uses both · everything runs on the landing zone · observability and security cut across"
+  consumer:
+    label: Software Engineering
+    division: CD
+    note: "Builds and maintains the applications — uses both the platform and the AI SDLC"
+  columns:
+    - proposition: platform-engineering
+      parts: [Containers, Version control, Pipelines & CI/CD, Reporting]
+    - proposition: ai-sdlc
+      parts: [Agents, Flows, Skills, MCP integration, Guardrails]
+  foundation:
+    proposition: cloud-landingzone
+    note: "Everything is deployed on it"
+  rail:
+    proposition: observability
+    note: "Monitors the AI SDLC, the platform and the cloud"
+  band:
+    label: Security
+    division: STT
+    note: "Governs every layer — policies, controls and the requirements behind the guardrails"
+  links:
+    uses: uses
+    integrates: integrates with
+    deploys: deploys on

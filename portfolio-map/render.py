@@ -5,9 +5,9 @@
     python render.py --check    # validate the model only
 
 Outputs (all from one layout, so they cannot drift apart)
-    out/portfolio-overview.pptx    one slide, native editable shapes
-    out/portfolio-overview.drawio  draw.io / diagrams.net drawing
-    out/portfolio-overview.svg     preview — renders in a browser and in GitHub
+    out/portfolio-map.pptx         two slides, native editable shapes
+    out/architecture.svg|.drawio   the building blocks, responsibilities beside them
+    out/portfolio-overview.svg|.drawio   the propositions x divisions grid
     out/contribution-matrix.csv    the same facts as a grid, for Excel
     out/contribution-matrix.md     the same facts, rendered in the repo
 """
@@ -20,6 +20,7 @@ import sys
 
 import yaml
 
+import arch_layout
 import drawio_view
 import layout
 import svg_view
@@ -36,6 +37,7 @@ class Model:
         self.propositions = raw["propositions"]
         self.contributions = raw["contributions"]
         self.chain = raw.get("chain", [])
+        self.architecture = raw.get("architecture", {})
         self.div = {d["id"]: d for d in self.divisions}
         self.role = {r["id"]: r for r in self.roles}
         self.prop = {p["id"]: p for p in self.propositions}
@@ -59,6 +61,17 @@ class Model:
                             f"{c['expertise']!r}")
             if c["role"] not in self.role:
                 errs.append(f"contribution {n}: unknown role {c['role']}")
+        arch = self.architecture
+        for slot in ("foundation", "rail"):
+            if arch.get(slot, {}).get("proposition") not in self.prop and arch:
+                errs.append(f"architecture.{slot}: unknown proposition")
+        for col in arch.get("columns", []):
+            if col["proposition"] not in self.prop:
+                errs.append(f"architecture.columns: unknown proposition "
+                            f"{col['proposition']}")
+        for slot in ("consumer", "band"):
+            if arch and arch.get(slot, {}).get("division") not in self.div:
+                errs.append(f"architecture.{slot}: unknown division")
         for n, step in enumerate(self.chain, start=1):
             stray = set(step) - {"division", "label"}
             if stray:
@@ -67,6 +80,13 @@ class Model:
             elif step["division"] not in self.div:
                 errs.append(f"chain step {n}: unknown division {step['division']}")
         return errs
+
+    def owner_of(self, proposition: str) -> str | None:
+        """The division that builds a proposition — its colour in the drawing."""
+        for c in self.contributions:
+            if c["proposition"] == proposition and c["role"] == "build":
+                return c["division"]
+        return None
 
     def contributions_for(self, proposition: str, division: str) -> list[dict]:
         return [c for c in self.contributions
@@ -130,15 +150,18 @@ def main() -> int:
 
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    page = layout.build(m)
-    written = [svg_view.write(page, out / "portfolio-overview.svg"),
-               drawio_view.write(page, out / "portfolio-overview.drawio")]
+    overview, architecture = layout.build(m), arch_layout.build(m)
+    written = [svg_view.write(overview, out / "portfolio-overview.svg"),
+               drawio_view.write(overview, out / "portfolio-overview.drawio"),
+               svg_view.write(architecture, out / "architecture.svg"),
+               drawio_view.write(architecture, out / "architecture.drawio")]
     matrix_csv(m, out / "contribution-matrix.csv")
     (out / "contribution-matrix.md").write_text(matrix_markdown(m), encoding="utf-8")
     written += [out / "contribution-matrix.csv", out / "contribution-matrix.md"]
     if not args.no_pptx:
         import pptx_view
-        written.append(pptx_view.build(page, out / "portfolio-overview.pptx"))
+        written.append(pptx_view.build([architecture, overview],
+                                       out / "portfolio-map.pptx"))
     for w in written:
         print(f"wrote {w}")
     if assumed:
